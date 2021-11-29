@@ -33,8 +33,8 @@ function Login(){
         <RectButton 
           onPress={handleNavigateToLanding}
           style={[styles.button, styles.buttonSecondary]}>
-          <Icon size={30} color="white" name="facebook" />
-          <Text style={styles.buttonText}>Login with Facebook</Text>
+          <Icon size={30} color="white" name="login" />
+          <Text style={styles.buttonText}>Login in App</Text>
         </RectButton>
       </View>
 

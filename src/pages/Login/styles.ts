@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
   },
 
   buttonsContainer:{
-    marginTop : 40,
-    gap: 15,
+    marginVertical: 30,
+    paddingVertical: 15,
     justifyContent: 'center',
   },
 
@@ -40,31 +40,32 @@ const styles = StyleSheet.create({
     width : '100%',
     backgroundColor :'#333',
     borderRadius : 8,
-    padding: 24,
+    padding: 20,
     justifyContent : 'space-between',
     flexDirection : 'row',
     alignContent: 'center',
     alignItems: 'center',
+    marginVertical: 10,
   },
 
   buttonPrimary:{
     backgroundColor: '#d11f1f',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems : 'center',
     width: '100%',
   },
 
   buttonSecondary:{
-    backgroundColor: '#1f34d1',
-    justifyContent: 'space-evenly',
-    alignItems : 'center',
+    backgroundColor: '#218f2c',
+    justifyContent: 'space-between',
+    alignItems : 'center', 
     width: '100%',
   },
 
   buttonText:{
     fontFamily: 'Archivo_700Bold',
     color: '#fff',
-    fontSize: 20,
+    fontSize: 16,
   },
 
   totalConnections:{

@@ -67,6 +67,10 @@ function Pegar() {
     goBack();
   }
 
+  function handleConfirmationBack() {
+    setConfirmation(false);
+  }
+
   function handleNavigateToWeb() {
     Linking.openURL("https://proffylevir.vercel.app/give-classes");
   }
@@ -87,15 +91,20 @@ function Pegar() {
 
         {confirmation ? (
           <View style={styles.containerSecondary}>
-          <View style={styles.content}>
-            <View style={styles.contentIcon}>
-              <Icon size={120} color={COLORS.GREEN} name="bike-fast" />
+            <View style={styles.content}>
+              <View style={styles.contentIcon}>
+                <Icon size={120} color={COLORS.GREEN} name="bike-fast" />
+              </View>
+              <Text style={styles.contentText}>
+                Em deslocamento para o local
+              </Text>
+              <View style={styles.rectButtonView}>
+                <RectButton onPress={handleConfirmationBack} style={styles.okButton}>
+                  <Text style={styles.okButtonText}>Voltar</Text>
+                </RectButton>
+              </View>
             </View>
-            <Text style={styles.contentText}>
-              Em deslocamento para o local
-            </Text>
           </View>
-        </View>
         ) : (
           <View style={styles.containerSecondary}>
             <View style={styles.content}>
@@ -129,15 +138,13 @@ function Pegar() {
                 {stations.properties.qtd_bikes_total}
               </Text>
             </View>
-            <RectButton onPress={handlePegar} style={styles.okButton}>
-              <Text style={styles.okButtonText}>Solicitar</Text>
-            </RectButton>
+            <View style={styles.rectButtonView}>
+              <RectButton onPress={handlePegar} style={styles.okButton}>
+                <Text style={styles.okButtonText}>Solicitar</Text>
+              </RectButton>
+            </View>
           </View>
         )}
-
-        <RectButton onPress={handleNavigateBack}>
-          <Text style={styles.backButtonText}>Voltar</Text>
-        </RectButton>
       </View>
     </View>
   );

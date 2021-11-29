@@ -9,16 +9,22 @@ const styles = StyleSheet.create({
     backgroundColor :'#f0f0f7',
   },
   containerSecondary:{
-    paddingVertical: 40,
+    paddingVertical: 30,
+  },
+  rectButtonView: {
+    flex: 1,
+    width: '100%',
+    alignContent: 'center',
+    alignItems: 'center',
+
   },
 
   content:{
-    flex:1,
     justifyContent: 'space-between',
     alignItems: 'center',
     alignContent: 'center',
-    flexDirection: 'row',
-    paddingHorizontal: 40,
+    flexDirection: 'column',
+    paddingHorizontal: 10,
     paddingVertical : 10,
   },
   contentIcon: {
