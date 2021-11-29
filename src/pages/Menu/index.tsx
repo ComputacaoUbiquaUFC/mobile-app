@@ -3,12 +3,13 @@ import { View , ScrollView, Text , TextInput} from 'react-native';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import PageHeader from '../../components/PageHeader';
 import EstacaoItem, { Teacher } from '../../components/EstacaoItem';
-import {Feather} from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from '@expo/vector-icons';
 
 import styles from './styles';
 import api from '../../services/api';
 import { useFocusEffect } from '@react-navigation/core';
+import { COLORS } from '../../theme';
 
 function Menu(){
 
@@ -44,7 +45,7 @@ function Menu(){
     loadFavorites();
     const response = await api.get('classes',{
       params: {
-        subject,
+        subject, 
         week_day,
         time,
       }
@@ -58,24 +59,35 @@ function Menu(){
     
    <View style={styles.container}>
      <PageHeader title="Menu de opções" />
+      <View>
 
-     <ScrollView
-      style={styles.teacherList}
-      contentContainerStyle={{
-        paddingHorizontal: 16,  
-        paddingBottom: 16,
-      }}
-     >
-       {teachers.map((teacher:Teacher) => {
-         return (
-          <EstacaoItem 
-            key={teacher.id} 
-            teacher={teacher}
-            favorited={favorites.includes(teacher.id)}  
-          />
-          )
-       })} 
-     </ScrollView>
+      <View style={styles.containerButtons}>
+        <RectButton style={styles.submitButton}>
+        <Ionicons name="arrow-back-outline" size={24} color={COLORS.WHITE}/>
+          <Text style={styles.submitButtonText}>
+            Botão 1
+          </Text>
+        </RectButton>
+        <RectButton style={styles.submitButton}>
+          <Text style={styles.submitButtonText}>
+            Botão 2
+          </Text>
+        </RectButton>
+      </View>
+      <View style={styles.containerButtons}>
+        <RectButton style={styles.submitButton}>
+          <Text style={styles.submitButtonText}>
+            Botão 1
+          </Text>
+        </RectButton>
+        <RectButton style={styles.submitButton}>
+          <Text style={styles.submitButtonText}>
+            Botão 2
+          </Text>
+        </RectButton>
+      </View>
+
+      </View>
    </View>
   );
 }

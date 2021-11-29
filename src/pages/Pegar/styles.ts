@@ -6,16 +6,39 @@ import { COLORS } from '../../theme';
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor : COLORS.GREEN,
-    justifyContent: 'space-around',
-    padding: 40,
+    backgroundColor :'#f0f0f7',
+  },
+  containerSecondary:{
+    paddingVertical: 40,
   },
 
   content:{
     flex:1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignContent: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 40,
+    paddingVertical : 10,
+  },
+  contentIcon: {
+    alignItems: 'center',
+    alignContent: 'center',
+    flexDirection: 'row',
+    paddingRight:15,
+    color:COLORS.GREEN,
   },
 
+  contentTitle:{
+    color:COLORS.GREEN,
+    fontSize: 20,
+    fontFamily: 'Archivo_700Bold',
+  },
+  contentText:{
+    color:COLORS.PURPLE,
+    fontSize: 16,
+    fontFamily: 'Archivo_700Bold',
+  },
   title:{
     fontFamily: 'Archivo_700Bold',
     color:'#fff',
@@ -47,7 +70,9 @@ const styles = StyleSheet.create({
     height:50,
     alignItems:'center',
     justifyContent:'center',
+    alignContent: 'center',
     borderRadius: 8,
+    width:210,
   },
 
   okButtonText:{
@@ -55,7 +80,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Archivo_700Bold',
   },
-
+  backButtonText:{
+    color:COLORS.PURPLE,
+    fontSize: 16,
+    fontFamily: 'Archivo_700Bold',
+  },
+  containerButtons: {
+    flexDirection : 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignContent: 'center'
+  }
 });
 
 export default styles;

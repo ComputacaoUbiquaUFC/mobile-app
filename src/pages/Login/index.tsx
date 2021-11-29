@@ -6,35 +6,14 @@ import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
 import landingImg from '../../assets/images/bike.png';
-import studyIcon from '../../assets/images/icons/study.png';
-import giveClassesIcon from '../../assets/images/icons/give-classes.png';
-import heartIcon from '../../assets/images/icons/heart.png';
-import api from '../../services/api';
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function Login(){
   const {navigate} = useNavigation();
-  const [totalConnections, setTotalConnections] = useState(0);
-
-  useEffect(() => {
-    api.get('connections').then(res=>{
-      const {total} = res.data;
-      setTotalConnections(total);
-    })
-  }, [])
-
-  function handleNavigateToGiveClassesPage(){
-    navigate('Pegar');
-  }
-
   function handleNavigateToLanding(){
     navigate('Landing');
   }
-  
-  function handleNavigateToStudyPages(){
-    navigate('Study');
-  }
-  
+
   return (
     <View style={styles.container}>
       <Image source={landingImg} style={styles.banner} />
@@ -47,7 +26,15 @@ function Login(){
         <RectButton 
           onPress={handleNavigateToLanding}
           style={[styles.button, styles.buttonPrimary]}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Icon size={30} color="white" name="google" />
+          <Text style={styles.buttonText}>Login with Google</Text>
+        </RectButton>
+
+        <RectButton 
+          onPress={handleNavigateToLanding}
+          style={[styles.button, styles.buttonSecondary]}>
+          <Icon size={30} color="white" name="facebook" />
+          <Text style={styles.buttonText}>Login with Facebook</Text>
         </RectButton>
       </View>
 

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COLORS } from '../../theme';
 
 //pesquisar sobre styles components 
 
@@ -42,20 +43,34 @@ const styles = StyleSheet.create({
   },
 
   submitButton:{
-    backgroundColor: '#04d361',
-    height:56,
-    borderRadius: 8,
+    width: 130,
+    backgroundColor: COLORS.GREEN_SECONDARY,
+    height:76,
+    borderRadius: 4,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    marginHorizontal: 20,
+    marginVertical: 30,
+    padding: 10,
   },
 
   submitButtonText:{
     color : '#FFF',
     fontFamily: 'Archivo_700Bold',
     fontSize: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    textAlign: 'center',
   },
 
+  containerButtons: {
+    flexDirection : 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignContent: 'center'
+  }
 });
 
 export default styles; 

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   banner:{
     width:'100%',
     height: 250,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
 
   title:{
@@ -30,28 +30,35 @@ const styles = StyleSheet.create({
   },
 
   buttonsContainer:{
-    flexDirection : 'row',
     marginTop : 40,
+    gap: 15,
     justifyContent: 'center',
   },
 
   button:{
     height: 90,
-    width : '48%',
+    width : '100%',
     backgroundColor :'#333',
     borderRadius : 8,
     padding: 24,
     justifyContent : 'space-between',
+    flexDirection : 'row',
+    alignContent: 'center',
+    alignItems: 'center',
   },
 
   buttonPrimary:{
-    backgroundColor: COLORS.GREEN_SECONDARY,
-    justifyContent: 'center',
+    backgroundColor: '#d11f1f',
+    justifyContent: 'space-evenly',
     alignItems : 'center',
+    width: '100%',
   },
 
   buttonSecondary:{
-    backgroundColor: '#04d301',
+    backgroundColor: '#1f34d1',
+    justifyContent: 'space-evenly',
+    alignItems : 'center',
+    width: '100%',
   },
 
   buttonText:{

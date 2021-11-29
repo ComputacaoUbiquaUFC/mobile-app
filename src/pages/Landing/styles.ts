@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   banner:{
     width:'100%',
     height: 250,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
 
   title:{
@@ -46,10 +46,14 @@ const styles = StyleSheet.create({
 
   buttonPrimary:{
     backgroundColor: COLORS.PURPLE,
+    justifyContent: 'space-evenly',
+    alignItems : 'center',
   },
 
   buttonSecondary:{
     backgroundColor: COLORS.GREEN_SECONDARY,
+    justifyContent: 'space-evenly',
+    alignItems : 'center',
   },
 
   buttonText:{
