@@ -5,6 +5,7 @@ import {
   Text,
   Linking,
   ActivityIndicator,
+  Platform
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { RectButton } from "react-native-gesture-handler";
@@ -14,7 +15,8 @@ import dados from "../../../estacoes.json";
 import styles from "./styles";
 import { COLORS } from "../../theme";
 import PageHeader from "../../components/PageHeader";
-
+import * as Location from 'expo-location';
+import Constants from 'expo-constants';
 interface DadosProps {
   geometry: {
     type: string;
@@ -58,11 +60,28 @@ function Pegar() {
   const [isHandle, setIsHandle] = useState(false);
   const [stations, setStations] = useState<DadosProps>(newData);
   const [confirmation, setConfirmation] = useState(false);
+  const [location, setLocation] = useState<any>({});
+  const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
     setStations(newData);
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS === 'android' && !Constants.isDevice) {
+        return;
+      }
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, [location]);
   function handleNavigateBack() {
     goBack();
   }
@@ -98,6 +117,13 @@ function Pegar() {
               <Text style={styles.contentText}>
                 Em deslocamento para o local
               </Text>
+              <Text style={styles.contentText}>
+                Sua latitude: {location.coords.latitude}
+              </Text>
+              <Text style={styles.contentText}>
+              Sua longitude: {location.coords.longitude}
+              </Text>
+              
               <View style={styles.rectButtonView}>
                 <RectButton onPress={handleConfirmationBack} style={styles.okButton}>
                   <Text style={styles.okButtonText}>Voltar</Text>
