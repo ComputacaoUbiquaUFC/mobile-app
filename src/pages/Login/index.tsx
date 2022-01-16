@@ -21,7 +21,7 @@ function Login(){
         if(!password)
         return Alert.alert('Digite sua senha!');
 
-        navigate('Home');
+        navigate('Landing');
 
         /* QUANDO A ROTA EXISTIR DE FATO
         await api.post('/Login',{

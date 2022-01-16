@@ -14,6 +14,10 @@ function Home(){
     navigate('Login');
   }
 
+  function handleNavigateToCadastro(){
+    navigate('Cadastro');
+  }
+
   return (
     <View style={styles.container}>
       <Image source={landingImg} style={styles.banner} />
@@ -25,7 +29,7 @@ function Home(){
         <TouchableOpacity>
         <RectButton 
             style={[styles.button, styles.buttonSecondary]}
-            onPress={handleNavigateToLanding}>
+            onPress={handleNavigateToCadastro}>
             <Text style={styles.buttonText}>CRIAR CONTA</Text>
           </RectButton>
           <RectButton 
