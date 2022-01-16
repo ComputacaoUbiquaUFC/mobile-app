@@ -1,45 +1,79 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image ,Text, TouchableOpacity} from 'react-native';
+import { KeyboardAvoidingView, Alert, View, Image ,Text, TextInput, TouchableOpacity} from 'react-native';
 //rota de navegacao
-import { useNavigation } from '@react-navigation/native';
-//rectButton adapta o botao de acordo com o sistema operacional do celular
-import { RectButton } from 'react-native-gesture-handler';
+import { NavigationRouteContext, useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import landingImg from '../../assets/images/bike.png';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { RectButton } from 'react-native-gesture-handler';
+//import emailValidator from '../../middlewares/emailValidator';
+//import passwordValidator from '../../middlewares/passwordValidator';
+//import api from '../../services/api';
 
 function Login(){
-  const {navigate} = useNavigation();
-  function handleNavigateToLanding(){
-    navigate('Landing');
-  }
 
-  return (
-    <View style={styles.container}>
-      <Image source={landingImg} style={styles.banner} />
-      <Text style={styles.title}>
-        Seja bem vindo , {'\n'}
-        <Text style={styles.titleBold}>Faça login na aplicação</Text>
-      </Text>
-      
-      <View style={styles.buttonsContainer}>
-        <RectButton 
-          onPress={handleNavigateToLanding}
-          style={[styles.button, styles.buttonPrimary]}>
-          <Icon size={30} color="white" name="google" />
-          <Text style={styles.buttonText}>Login with Google</Text>
-        </RectButton>
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-        <RectButton 
-          onPress={handleNavigateToLanding}
-          style={[styles.button, styles.buttonSecondary]}>
-          <Icon size={30} color="white" name="login" />
-          <Text style={styles.buttonText}>Login in App</Text>
-        </RectButton>
-      </View>
+    async function onLoginPressed(){
+        if(!email)
+        return Alert.alert('Digite seu usuário!');
 
-    </View>
-  )
+        if(!password)
+        return Alert.alert('Digite sua senha!');
+
+        navigate('Home');
+
+        /* QUANDO A ROTA EXISTIR DE FATO
+        await api.post('/Login',{
+            email,
+            password
+        }).then(() => {
+            navigate('Home');
+        })*/
+    }
+
+    const {navigate} = useNavigation();
+    function handleNavigateToLanding(){
+      navigate('Landing');
+    }
+
+    return (
+        <View style={styles.container}>
+            <View>
+                <Image source={landingImg} style={styles.banner}/>
+            </View>
+            <KeyboardAvoidingView>
+            <View>
+                <TextInput
+                    style={styles.inputarea} 
+                    maxLength={25}  
+                    placeholder='Usuário'
+                    autoCapitalize='none'
+                    autoCompleteType='email'
+                    textContentType='emailAddress'
+                    keyboardType='email-address'
+                    onChangeText={text => setEmail(text)}
+                    value={email}
+                />
+                <TextInput
+                    style={styles.inputarea} 
+                    maxLength={8}
+                    placeholder='Senha' 
+                    secureTextEntry={true}
+                    onChangeText={text => setPassword(text)}
+                    value={password}
+                />
+                <TouchableOpacity>
+                    <RectButton 
+                        style={[styles.button, styles.buttonLogin]}
+                        onPress={onLoginPressed}>
+                        <Text style={styles.buttonText}>ENTRAR</Text>
+                    </RectButton>
+                </TouchableOpacity>
+            </View>
+        </KeyboardAvoidingView>
+        </View>
+    )
 }
 
 export default Login;

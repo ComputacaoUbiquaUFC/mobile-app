@@ -1,8 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../theme';
 
-//pesquisar sobre styles components 
-
 const styles = StyleSheet.create({
   container:{
     flex:1,
@@ -17,65 +15,48 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
 
-  title:{
-    fontFamily: 'Poppins_400Regular',
-    color:'#fff',
-    fontSize: 20,
-    lineHeight: 30,
-    marginTop: 40,
-  },
-
-  titleBold:{
-     fontFamily: 'Poppins_600SemiBold',
-  },
-
-  buttonsContainer:{
-    marginVertical: 30,
-    paddingVertical: 15,
-    justifyContent: 'center',
+  inputarea: {
+    fontSize: 16,
+    color: COLORS.BLACK,
+    padding: 15,
+    width: '95%',
+    borderWidth: 1,
+    backgroundColor : COLORS.WHITE,
+    borderColor: '#000',
+    marginHorizontal: 10,
+    borderRadius: 10,
+    height: 50,
+    textAlignVertical: 'top',
+    marginBottom: 7
   },
 
   button:{
-    height: 90,
+    height: 50,
     width : '100%',
     backgroundColor :'#333',
-    borderRadius : 8,
+    marginHorizontal: 10,
+    borderRadius : 10,
     padding: 20,
-    justifyContent : 'space-between',
+    justifyContent: 'center',
     flexDirection : 'row',
     alignContent: 'center',
     alignItems: 'center',
-    marginVertical: 10,
+    marginVertical: 5,
   },
 
-  buttonPrimary:{
-    backgroundColor: '#d11f1f',
-    justifyContent: 'space-between',
-    alignItems : 'center',
-    width: '100%',
-  },
-
-  buttonSecondary:{
+  buttonLogin:{
     backgroundColor: '#218f2c',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems : 'center', 
-    width: '100%',
+    width: '95%',
   },
 
   buttonText:{
     fontFamily: 'Archivo_700Bold',
-    color: '#fff',
-    fontSize: 16,
+    color: COLORS.WHITE,
+    fontSize: 16
   },
 
-  totalConnections:{
-    fontFamily: 'Poppins_400Regular',
-    color: '#b4c2ff',
-    fontSize: 12,
-    lineHeight:20,
-    maxWidth: 140,
-    marginTop : 40,
-  },
 });
 
 export default styles;
