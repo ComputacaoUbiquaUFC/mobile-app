@@ -21,8 +21,6 @@ function Login(){
         if(!password)
         return Alert.alert('Digite sua senha!');
 
-        navigate('Home');
-
         /* QUANDO A ROTA EXISTIR DE FATO
         await api.post('/Login',{
             email,
@@ -33,8 +31,9 @@ function Login(){
     }
 
     const {navigate} = useNavigation();
-    function handleNavigateToLanding(){
-      navigate('Landing');
+    
+    function toReset(){
+      navigate('ResetPass');
     }
 
     return (
@@ -63,6 +62,15 @@ function Login(){
                     onChangeText={text => setPassword(text)}
                     value={password}
                 />
+                <View style={styles.forgotPassword}>
+                    <TouchableOpacity>
+                        <Text 
+                            style={styles.forgot}
+                            onPress={toReset}>
+                                Esqueceu a senha?
+                        </Text>
+                    </TouchableOpacity>
+                </View>
                 <TouchableOpacity>
                     <RectButton 
                         style={[styles.button, styles.buttonLogin]}
@@ -70,6 +78,12 @@ function Login(){
                         <Text style={styles.buttonText}>ENTRAR</Text>
                     </RectButton>
                 </TouchableOpacity>
+                <View style={styles.row}>
+                    <Text>Não tem uma conta? </Text>
+                        <TouchableOpacity>
+                            <Text style={styles.link}>Criar conta</Text>
+                        </TouchableOpacity>
+                </View>
             </View>
         </KeyboardAvoidingView>
         </View>

@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     flexDirection : 'row',
     alignContent: 'center',
     alignItems: 'center',
-    marginVertical: 5,
+    marginVertical: 0.3,
   },
 
   buttonLogin:{
@@ -55,6 +55,34 @@ const styles = StyleSheet.create({
     fontFamily: 'Archivo_700Bold',
     color: COLORS.WHITE,
     fontSize: 16
+  },
+
+  forgotPassword: {
+    width: '97%',
+    alignItems: 'flex-end',
+    marginBottom: 20,
+    marginVertical: 5
+  },
+
+  forgot: {
+    fontSize: 15,
+    color: COLORS.GRAY_QUATERNARY,
+  },
+
+  row: {
+    fontSize: 15,
+    flexDirection: 'row',
+    padding: 15,
+    color: COLORS.GRAY_QUATERNARY,
+    justifyContent: 'center',
+    marginTop: 4,
+  },
+
+  link: {
+    fontSize: 15,
+    fontFamily: 'Archivo_700Bold',
+    justifyContent: 'center',
+    color: COLORS.GRAY_QUATERNARY,
   },
 
 });
