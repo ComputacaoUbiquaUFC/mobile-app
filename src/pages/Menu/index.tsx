@@ -9,10 +9,12 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
 import api from '../../services/api';
 import { useFocusEffect } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 import { COLORS } from '../../theme';
 
 function Menu(){
 
+  const { navigate } = useNavigation();
   const [isFiltersVisible , setIsFiltersVisible] = useState(false);
   const [teachers, setTeachers] = useState([]);
   const [favorites, setFavorites] = useState<number[]>([]);
@@ -54,7 +56,11 @@ function Menu(){
     setTeachers(response.data);
   }
 
+  function toEditar() {
+    navigate("Editar");
+  }
 
+  
   return (
     
    <View style={styles.container}>
@@ -62,10 +68,10 @@ function Menu(){
       <View>
 
       <View style={styles.containerButtons}>
-        <RectButton style={styles.submitButton}>
+        <RectButton style={styles.submitButton} onPress={toEditar}>
         <Ionicons name="arrow-back-outline" size={24} color={COLORS.WHITE}/>
           <Text style={styles.submitButtonText}>
-            Botão 1
+            Editar
           </Text>
         </RectButton>
         <RectButton style={styles.submitButton}>
