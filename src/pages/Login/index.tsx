@@ -37,6 +37,9 @@ function Login(){
       navigate('ResetPass');
     }
 
+    function toCadastro(){
+        navigate('Cadastro');
+    }
     return (
         <View style={styles.container}>
             <View>
@@ -81,7 +84,7 @@ function Login(){
                 </TouchableOpacity>
                 <View style={styles.row}>
                     <Text>Não tem uma conta? </Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={toCadastro}>
                             <Text style={styles.link}>Criar conta</Text>
                         </TouchableOpacity>
                 </View>
