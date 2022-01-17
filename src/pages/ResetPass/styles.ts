@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 50,
     textAlignVertical: 'top',
-    marginBottom: 7
+    marginBottom: 7,
+    marginTop: 30,
   },
 
   button:{
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     marginVertical: 0.3,
   },
 
-  buttonLogin:{
+  buttonSend:{
     backgroundColor: '#218f2c',
     justifyContent: 'center',
     alignItems : 'center', 
@@ -57,9 +58,9 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
 
-  forgotPassword: {
-    width: '97%',
-    alignItems: 'flex-end',
+  forgotText: {
+    width: '100%',
+    alignItems: 'center',
     marginBottom: 20,
     marginVertical: 5
   },
@@ -70,7 +71,6 @@ const styles = StyleSheet.create({
   },
 
   row: {
-    fontSize: 15,
     flexDirection: 'row',
     padding: 15,
     color: COLORS.GRAY_QUATERNARY,
@@ -79,10 +79,18 @@ const styles = StyleSheet.create({
   },
 
   link: {
-    fontSize: 15,
     fontFamily: 'Archivo_700Bold',
     justifyContent: 'center',
     color: COLORS.GRAY_QUATERNARY,
+  },
+
+  title:{
+    fontFamily: 'Poppins_600SemiBold',
+    color:'#fff',
+    fontSize: 25,
+    lineHeight: 30,
+    marginTop: 5,
+    textAlign: 'center'
   },
 
 });

@@ -9,8 +9,10 @@ import landingImg from '../../assets/images/bike.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function Home(){
+  
   const {navigate} = useNavigation();
-  function handleNavigateToLanding(){
+
+  function handleNavigateToLogin(){
     navigate('Login');
   }
 
@@ -30,11 +32,14 @@ function Home(){
         <RectButton 
             style={[styles.button, styles.buttonSecondary]}
             onPress={handleNavigateToCadastro}>
+
             <Text style={styles.buttonText}>CRIAR CONTA</Text>
           </RectButton>
+        </TouchableOpacity>
+        <TouchableOpacity>
           <RectButton 
             style={[styles.button, styles.buttonSecondary]}
-            onPress={handleNavigateToLanding}>
+            onPress={handleNavigateToLogin}>
             <Text style={styles.buttonText}>JÁ TENHO CONTA</Text>
           </RectButton>
         </TouchableOpacity>
