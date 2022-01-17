@@ -15,6 +15,7 @@ function Login(){
     const [password, setPassword] = useState('');
 
     async function onLoginPressed(){
+        
         if(!email)
         return Alert.alert('Digite seu usuário!');
 
