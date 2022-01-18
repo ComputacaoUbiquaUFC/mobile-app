@@ -4,7 +4,9 @@ import { KeyboardAvoidingView, Alert, View, Image ,Text, TextInput, TouchableOpa
 import { NavigationRouteContext, useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import landingImg from '../../assets/images/bike.png';
-import { RectButton } from 'react-native-gesture-handler';
+import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
+import { Ionicons } from "@expo/vector-icons";
+import { COLORS } from "../../theme";
 
 function Reset(){
 
@@ -15,12 +17,27 @@ function Reset(){
         return Alert.alert('Digite o e-mail!');
     }
 
+    const {navigate} = useNavigation();
+
+    function handleGoBack() {
+        navigate("Home");
+    }
+
     return (
         <View style={styles.container}>
+            <View style={styles.viewAb}>
+                <BorderlessButton onPress={handleGoBack} style={styles.backButton}>
+                    <Ionicons
+                        name="arrow-back-outline"
+                        size={24}
+                        color={COLORS.WHITE}
+                    />
+                </BorderlessButton>
+            </View>
             <View>
                 <Image source={landingImg} style={styles.banner}/>
                 <Text style={styles.title}>
-                Resetar senha 
+                    Resetar senha 
                 </Text>
             </View>
             <KeyboardAvoidingView>
@@ -28,7 +45,7 @@ function Reset(){
                 <TextInput
                     style={styles.inputarea} 
                     maxLength={25}  
-                    placeholder='E-mail'
+                    placeholder='Email'
                     autoCapitalize='none'
                     autoCompleteType='email'
                     textContentType='emailAddress'

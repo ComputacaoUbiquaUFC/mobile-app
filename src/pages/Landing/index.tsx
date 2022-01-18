@@ -24,7 +24,7 @@ function Landing(){
     <View style={styles.container}>
       <Image source={landingImg} style={styles.banner} />
       <Text style={styles.title}>
-        Olá João , {'\n'}
+        Olá Joao , {'\n'}
         <Text style={styles.titleBold}>Escolha uma das opções</Text>
       </Text>
       

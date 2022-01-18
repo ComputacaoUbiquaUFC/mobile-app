@@ -4,7 +4,9 @@ import { KeyboardAvoidingView, Alert, View, Image ,Text, TextInput, TouchableOpa
 import { NavigationRouteContext, useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import landingImg from '../../assets/images/bike.png';
-import { RectButton } from 'react-native-gesture-handler';
+import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
+import { Ionicons } from "@expo/vector-icons";
+import { COLORS } from "../../theme";
 //import emailValidator from '../../middlewares/emailValidator';
 //import passwordValidator from '../../middlewares/passwordValidator';
 //import api from '../../services/api';
@@ -40,8 +42,22 @@ function Login(){
     function toCadastro(){
         navigate('Cadastro');
     }
+
+    function handleGoBack() {
+        navigate("Home");
+    }
+
     return (
         <View style={styles.container}>
+            <View style={styles.viewAb}>
+                <BorderlessButton onPress={handleGoBack} style={styles.backButton}>
+                    <Ionicons
+                        name="arrow-back-outline"
+                        size={24}
+                        color={COLORS.WHITE}
+                    />
+                </BorderlessButton>
+            </View>
             <View>
                 <Image source={landingImg} style={styles.banner}/>
             </View>
@@ -83,10 +99,10 @@ function Login(){
                     </RectButton>
                 </TouchableOpacity>
                 <View style={styles.row}>
-                    <Text>Não tem uma conta? </Text>
-                        <TouchableOpacity onPress={toCadastro}>
-                            <Text style={styles.link}>Criar conta</Text>
-                        </TouchableOpacity>
+                    <Text style={styles.link2}>Não tem uma conta? </Text>
+                    <TouchableOpacity onPress={toCadastro}>
+                        <Text style={styles.link}>Criar conta</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </KeyboardAvoidingView>

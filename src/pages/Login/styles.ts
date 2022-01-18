@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
   banner:{
     width:'100%',
-    height: 250,
+    height: 200,
     resizeMode: 'contain',
   },
 
@@ -65,25 +65,44 @@ const styles = StyleSheet.create({
   },
 
   forgot: {
-    fontSize: 15,
-    color: COLORS.GRAY_QUATERNARY,
+    fontSize: 16,
+    color: COLORS.WHITE,
   },
 
   row: {
-    fontSize: 15,
+    fontSize: 17,
     flexDirection: 'row',
     padding: 15,
-    color: COLORS.GRAY_QUATERNARY,
+    color: COLORS.WHITE,
     justifyContent: 'center',
     marginTop: 4,
   },
 
-  link: {
-    fontSize: 15,
-    fontFamily: 'Archivo_700Bold',
-    justifyContent: 'center',
-    color: COLORS.GRAY_QUATERNARY,
+  link2: {
+    color: COLORS.WHITE,
+    fontSize: 16
   },
+
+  link: {
+    fontSize: 16,
+    fontFamily: 'Archivo_700Bold', 
+    justifyContent: 'center',
+    color: COLORS.WHITE,
+  },
+
+  backButton: {
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+    width: 35,
+    height: 35
+  },
+
+  viewAb: {
+    position: 'absolute',
+    top: 60,
+    left: 50
+  }
 
 });
 

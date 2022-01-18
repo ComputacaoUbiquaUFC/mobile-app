@@ -24,7 +24,7 @@ function Home(){
     <View style={styles.container}>
       <Image source={landingImg} style={styles.banner} />
       <Text style={styles.title}>
-        Bem vindo!
+        Bem-vindo!
       </Text>
       
       <View style={styles.buttonsContainer}>

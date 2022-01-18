@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
   banner:{
     width:'100%',
-    height: 250,
+    height: 200,
     resizeMode: 'contain',
   },
 
@@ -66,14 +66,14 @@ const styles = StyleSheet.create({
   },
 
   forgot: {
-    fontSize: 15,
-    color: COLORS.GRAY_QUATERNARY,
+    fontSize: 16,
+    color: COLORS.WHITE,
   },
 
   row: {
     flexDirection: 'row',
     padding: 15,
-    color: COLORS.GRAY_QUATERNARY,
+    color: COLORS.WHITE,
     justifyContent: 'center',
     marginTop: 4,
   },
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   link: {
     fontFamily: 'Archivo_700Bold',
     justifyContent: 'center',
-    color: COLORS.GRAY_QUATERNARY,
+    color: COLORS.WHITE,
   },
 
   title:{
@@ -92,6 +92,20 @@ const styles = StyleSheet.create({
     marginTop: 5,
     textAlign: 'center'
   },
+
+  backButton: {
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+    width: 35,
+    height: 35
+  },
+
+  viewAb: {
+    position: 'absolute',
+    top: 60,
+    left: 50
+  }
 
 });
 

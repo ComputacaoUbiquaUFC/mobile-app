@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     backgroundColor : COLORS.WHITE,
     borderColor: '#000',
     marginHorizontal: 10,
-    marginBottom: 5,
+    marginBottom: 7,
     borderRadius: 10,
     height: 50,
     textAlignVertical: 'top',

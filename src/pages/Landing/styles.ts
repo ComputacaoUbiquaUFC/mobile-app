@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
   },
 
   buttonPrimary:{
-    backgroundColor: COLORS.PURPLE,
+    backgroundColor: '#218f2c',
     justifyContent: 'space-evenly',
     alignItems : 'center',
   },
 
   buttonSecondary:{
-    backgroundColor: COLORS.GREEN_SECONDARY,
+    backgroundColor: '#218f2c',
     justifyContent: 'space-evenly',
     alignItems : 'center',
   },
