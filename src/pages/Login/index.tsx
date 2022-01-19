@@ -7,9 +7,6 @@ import landingImg from '../../assets/images/bike.png';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
-//import emailValidator from '../../middlewares/emailValidator';
-//import passwordValidator from '../../middlewares/passwordValidator';
-//import api from '../../services/api';
 
 function Login(){
 

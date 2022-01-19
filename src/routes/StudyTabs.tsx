@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Menu from '../pages/Menu';
 import Favorites from '../pages/Favorites';
+import { COLORS } from '../theme';
 
 //icones padroes do expo
 import { Ionicons } from '@expo/vector-icons';
@@ -46,7 +47,7 @@ function StudyTabs(){
           tabBarLabel: 'Opções',
           tabBarIcon:({color, size,focused})=>{
             return (
-              <Ionicons name="grid-outline" size={size} color={focused?'#8257e5': color}/>
+              <Ionicons name="grid-outline" size={size} color={focused? COLORS.GREEN: color}/>
             )
           }
         }}
@@ -58,7 +59,7 @@ function StudyTabs(){
           tabBarLabel: 'Favoritos',
           tabBarIcon:({color, size , focused})=>{
             return (
-              <Ionicons name="heart-outline" size={size} color={focused?'#8257e5': color}/>
+              <Ionicons name="heart-outline" size={size} color={focused? COLORS.GREEN: color}/>
             )
           }
         }}
@@ -71,7 +72,7 @@ function StudyTabs(){
           tabBarLabel: 'Todos',
           tabBarIcon:({color, size , focused})=>{
             return (
-              <Ionicons name="list-outline" size={size} color={focused?'#8257e5': color}/>
+              <Ionicons name="list-outline" size={size} color={focused? COLORS.GREEN: color}/>
             )
           }
         }}

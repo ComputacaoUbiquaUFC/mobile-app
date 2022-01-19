@@ -13,13 +13,12 @@ const styles = StyleSheet.create({
     marginTop: -40,
   },
 
-
   searchForm:{
     marginBottom: 24,
   },
 
   label:{
-    color: '#d4c2ff', 
+    color: COLORS.GREEN, 
     fontFamily: 'Poppins_400Regular',
   },
 

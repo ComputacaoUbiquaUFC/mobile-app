@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 
   forgot: {
     fontSize: 16,
-    color: COLORS.WHITE,
+    color: COLORS.BLACK_SECONDARY,
   },
 
   row: {
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
 
   link2: {
-    color: COLORS.WHITE,
+    color: COLORS.BLACK_SECONDARY,
     fontSize: 16
   },
 
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Archivo_700Bold', 
     justifyContent: 'center',
-    color: COLORS.WHITE,
+    color: COLORS.BLACK_SECONDARY
   },
 
   backButton: {

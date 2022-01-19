@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 //rectButton adapta o botao de acordo com o sistema operacional do celular
 import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
-import landingImg from '../../assets/images/bike.png';
+import landingImg from '../../../assets/splash1.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function Home(){
@@ -23,9 +23,6 @@ function Home(){
   return (
     <View style={styles.container}>
       <Image source={landingImg} style={styles.banner} />
-      <Text style={styles.title}>
-        Bem-vindo!
-      </Text>
       
       <View style={styles.buttonsContainer}>
         <TouchableOpacity>

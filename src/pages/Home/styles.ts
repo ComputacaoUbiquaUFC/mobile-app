@@ -8,12 +8,12 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor : COLORS.GREEN,
     justifyContent: 'center',
-    padding: 40,
+    padding: 10,
   },
 
   banner:{
     width:'100%',
-    height: 250,
+    height: 580,
     resizeMode: 'contain',
   },
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     color:'#fff',
     fontSize: 25,
     lineHeight: 30,
-    marginTop: 40,
+    marginTop: 10,
     textAlign: 'center'
   },
 

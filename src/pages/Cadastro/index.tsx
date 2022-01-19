@@ -20,9 +20,6 @@ import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import MaskInput from "react-native-mask-input";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
-//import emailValidator from '../../middlewares/emailValidator';
-//import passwordValidator from '../../middlewares/passwordValidator';
-//import api from '../../services/api';
 
 function Cadastro() {
   const [name, setName] = useState("");

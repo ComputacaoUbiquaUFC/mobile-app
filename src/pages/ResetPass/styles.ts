@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
   },
 
   forgot: {
-    fontSize: 16,
-    color: COLORS.WHITE,
+    fontSize: 15,
+    color: COLORS.BLACK_SECONDARY,
   },
 
   row: {
