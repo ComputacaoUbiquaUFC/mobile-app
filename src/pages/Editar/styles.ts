@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
   },
 
   inputText: {
-    fontSize: 20,
+    fontSize: 15,
     fontFamily: FONTS.BOLD,
-    color: COLORS.WHITE,
+    color: COLORS.BLACK_SECONDARY,
     paddingHorizontal: 15,
   },
 

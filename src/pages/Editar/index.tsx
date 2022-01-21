@@ -39,9 +39,9 @@ function Editar() {
   useEffect(() => {
     async function getDados(){
       //chamar api com os dados do usuario
-      setName('Levir César')
+      setName('Joao')
       setCpf({masked: '488.110.340-78' , unmasked: '48811034078'})
-      setEmail('levirteste@gmail.com')
+      setEmail('joao@gmail.com')
     }
    getDados();
   }, [])

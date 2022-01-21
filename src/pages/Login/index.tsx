@@ -62,7 +62,7 @@ function Login(){
             <View>
                 <TextInput
                     style={styles.inputarea} 
-                    maxLength={25}  
+                    maxLength={25}
                     placeholder='Usuário'
                     autoCapitalize='none'
                     autoCompleteType='email'
