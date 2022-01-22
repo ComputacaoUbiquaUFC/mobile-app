@@ -64,6 +64,9 @@ function Menu(){
     navigate("Report");
   }
 
+  async function deleteAsyncStorage(){
+    await AsyncStorage.removeItem('@estacao');
+  }
 
   
   return (
@@ -87,8 +90,8 @@ function Menu(){
       </View>
       <View style={styles.containerButtons}>
         <RectButton style={styles.submitButton}>
-          <Text style={styles.submitButtonText}>
-            Botão 1
+          <Text style={styles.submitButtonText} onPress={deleteAsyncStorage}>
+            Deletar AsyncStorage
           </Text>
         </RectButton>
         <RectButton style={styles.submitButton}>

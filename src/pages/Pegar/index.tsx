@@ -17,6 +17,7 @@ import { COLORS } from "../../theme";
 import PageHeader from "../../components/PageHeader";
 import * as Location from 'expo-location';
 import Constants from 'expo-constants';
+import AsyncStorage from "@react-native-community/async-storage";
 interface DadosProps {
   geometry: {
     type: string;
@@ -56,7 +57,7 @@ const newData = {
 };
 
 function Pegar() {
-  const { goBack } = useNavigation();
+  const { goBack ,navigate } = useNavigation();
   const [isHandle, setIsHandle] = useState(false);
   const [stations, setStations] = useState<DadosProps>(newData);
   const [confirmation, setConfirmation] = useState(false);
@@ -68,7 +69,27 @@ function Pegar() {
   }, []);
 
   useEffect(() => {
-    (async () => {
+    
+  }, []);
+  function handleNavigateBack() {
+    goBack();
+  }
+
+  function handleConfirmationBack() {
+    setConfirmation(false);
+  }
+
+  function toReport(){
+    navigate('Report')
+  }
+  function handleNavigateToWeb() {
+    Linking.openURL("https://proffylevir.vercel.app/give-classes");
+  }
+
+  async function handlePegar() {
+    
+    await AsyncStorage.setItem('@estacao', JSON.stringify(stations));
+    setIsHandle(true);
       if (Platform.OS === 'android' && !Constants.isDevice) {
         return;
       }
@@ -80,26 +101,8 @@ function Pegar() {
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
-    })();
-  }, [location]);
-  function handleNavigateBack() {
-    goBack();
-  }
-
-  function handleConfirmationBack() {
-    setConfirmation(false);
-  }
-
-  function handleNavigateToWeb() {
-    Linking.openURL("https://proffylevir.vercel.app/give-classes");
-  }
-
-  function handlePegar() {
-    setIsHandle(true);
-    setTimeout(() => {
       setIsHandle(false);
       setConfirmation(true);
-    }, 3000);
   }
 
   return (
@@ -127,6 +130,10 @@ function Pegar() {
               <View style={styles.rectButtonView}>
                 <RectButton onPress={handleConfirmationBack} style={styles.okButton}>
                   <Text style={styles.okButtonText}>Voltar</Text>
+                </RectButton>
+              
+                <RectButton onPress={toReport} style={styles.okButtonReport}>
+                  <Text style={styles.okButtonText}>Algum problema?</Text>
                 </RectButton>
               </View>
             </View>

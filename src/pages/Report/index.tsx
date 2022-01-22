@@ -23,6 +23,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
 import validateCpf from "../../utils/validateCpf";
 import validateEmail from "../../utils/validateEmail";
+import AsyncStorage from "@react-native-community/async-storage";
 
 function Report() {
   const [name, setName] = useState("");
@@ -40,14 +41,24 @@ function Report() {
   const [isBikeComDefeito, setIsBikeComDefeito] = useState(false);
   const [isEstacaoNaoExiste, setIsEstacaoNaoExiste] = useState(false);
   const [isVagaDisponivel, setIsVagaDisponivel] = useState(false);
-  /*({
-    isEstacaoDisponivel: false,
-    isBikeComDefeito: false,
-    isEstacaoNaoExiste: false,
-    isVagaDisponivel: false
+  const [estacao, setEstacao] = useState<any>({
+    properties: {
+      endereco: 'Sem endereço'
+    }
   });
-  */
 
+  useEffect(() => {
+    async function getEstacao(){
+      const storagedUser = await AsyncStorage.getItem('@estacao');
+      console.log(storagedUser)
+      if(storagedUser ){
+        setEstacao(JSON.parse(storagedUser))
+        console.log(storagedUser)
+      }
+    }
+    getEstacao()
+  }, []);
+  
   async function onReportPressed() {
     if (
       !isEstacaoDisponivel &&
@@ -64,7 +75,7 @@ function Report() {
       setIsBikeComDefeito(false);
       setIsEstacaoNaoExiste(false);
       setIsVagaDisponivel(false);
-      navigate("Menu");
+      navigate("Landing");
     }, 3000);
   }
 
@@ -92,6 +103,7 @@ function Report() {
         </View>
         <View>
           <Text style={styles.titulo}>Algum problema com essa estação?</Text>
+          {estacao && <Text>{estacao.properties.endereco}</Text>}
         </View>
         <View>
           <View style={styles.checkboxContainer}>

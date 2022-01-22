@@ -16,9 +16,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignContent: 'center',
     alignItems: 'center',
-
   },
-
   content:{
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -73,6 +71,16 @@ const styles = StyleSheet.create({
   okButton:{
     marginBottom: 50,
     backgroundColor: '#9871f5',
+    height:50,
+    alignItems:'center',
+    justifyContent:'center',
+    alignContent: 'center',
+    borderRadius: 8,
+    width:210,
+  },
+  okButtonReport:{
+    marginBottom: 50,
+    backgroundColor: COLORS.RED,
     height:50,
     alignItems:'center',
     justifyContent:'center',
