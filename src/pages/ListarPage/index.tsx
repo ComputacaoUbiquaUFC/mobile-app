@@ -43,7 +43,7 @@ function ListarPage(){
             favorited={true}
           />
         )
-      }).slice(0,5)}
+      })}
      </ScrollView>
 
     </View>

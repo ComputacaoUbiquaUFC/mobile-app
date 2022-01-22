@@ -19,6 +19,7 @@ export interface Teacher{
   whatsapp:string;
   properties: {
     nome:string;
+    endereco:string;
   }
 }
 
@@ -32,10 +33,13 @@ const EstacaoItem: React.FC<TeacherItemProps> = ({teacher, favorited}) => {
   const [isFavorited, setIsFavorited] = useState(favorited);
 
   function createNewConnection(){
+    /*
     alert('abrir mapa')
     api.post('connections',{
       user_id:teacher.id,
     });
+    */
+    Linking.openURL(`https://maps.google.com/maps?q=${teacher.properties?.endereco}&output=embed`);
   }
 
   async function handleToggleFavorite(){

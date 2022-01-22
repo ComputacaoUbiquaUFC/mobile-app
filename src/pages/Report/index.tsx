@@ -43,7 +43,8 @@ function Report() {
   const [isVagaDisponivel, setIsVagaDisponivel] = useState(false);
   const [estacao, setEstacao] = useState<any>({
     properties: {
-      endereco: 'Sem endereço'
+      endereco: 'Sem endereço',
+      id: 'sem id'
     }
   });
 
@@ -104,6 +105,7 @@ function Report() {
         <View>
           <Text style={styles.titulo}>Algum problema com essa estação?</Text>
           {estacao && <Text>{estacao.properties.endereco}</Text>}
+          {estacao && <Text>Id da estacao: {estacao.properties.id}</Text>}
         </View>
         <View>
           <View style={styles.checkboxContainer}>

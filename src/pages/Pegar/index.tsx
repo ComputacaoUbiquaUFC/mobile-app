@@ -65,12 +65,10 @@ function Pegar() {
   const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
-    setStations(newData);
-  }, []);
+    var item = dados.features[Math.floor(Math.random()*dados.features.length)];
+    setStations(item);
+  }, [confirmation]);
 
-  useEffect(() => {
-    
-  }, []);
   function handleNavigateBack() {
     goBack();
   }
@@ -82,14 +80,10 @@ function Pegar() {
   function toReport(){
     navigate('Report')
   }
-  function handleNavigateToWeb() {
-    Linking.openURL("https://proffylevir.vercel.app/give-classes");
-  }
-
   async function handlePegar() {
     
     await AsyncStorage.setItem('@estacao', JSON.stringify(stations));
-    setIsHandle(true);
+      setIsHandle(true);
       if (Platform.OS === 'android' && !Constants.isDevice) {
         return;
       }
