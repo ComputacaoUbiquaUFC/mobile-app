@@ -60,6 +60,11 @@ function Menu(){
     navigate("Editar");
   }
 
+  function toReport() {
+    navigate("Report");
+  }
+
+
   
   return (
     
@@ -74,9 +79,9 @@ function Menu(){
             Editar
           </Text>
         </RectButton>
-        <RectButton style={styles.submitButton}>
+        <RectButton style={styles.submitButton} onPress={toReport}>
           <Text style={styles.submitButtonText}>
-            Botão 2
+            Reportar
           </Text>
         </RectButton>
       </View>

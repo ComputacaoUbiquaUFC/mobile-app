@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\levir\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add -D @types/toastify-react-native
+  C:\Program Files\nodejs\node.exe C:\Users\levir\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @react-native-community
 
 PATH: 
   C:\Users\levir\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\levir\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Users\levir\drivers;C:\Program Files\PostgreSQL\14\bin;C:\Users\levir\apache-maven-3.8.4\bin;C:\Program Files\nodejs;C:\Users\levir\AppData\Local\Programs\Python\Python310\Scripts;C:\Users\levir\AppData\Local\Programs\Python\Python310;C:\Users\levir\AppData\Local\Microsoft\WindowsApps;C:\Users\levir\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Users\levir\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
@@ -14,8 +14,8 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2ftoastify-react-native: Not found
-      at Request.params.callback [as _callback] (C:\Users\levir\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67029:18)
+  Error: https://registry.yarnpkg.com/@react-native-community: Request "https://registry.yarnpkg.com/@react-native-community" returned a 405
+      at Request.params.callback [as _callback] (C:\Users\levir\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67038:18)
       at Request.self.callback (C:\Users\levir\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140883:22)
       at Request.emit (node:events:390:28)
       at Request.<anonymous> (C:\Users\levir\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141855:10)
@@ -60,8 +60,7 @@ npm manifest:
       "react-native-safe-area-context": "3.1.9",
       "react-native-screens": "~2.15.2",
       "react-native-vector-icons": "^9.0.0",
-      "react-native-web": "~0.13.12",
-      "toastify-react-native": "^2.0.0"
+      "react-native-web": "~0.13.12"
     },
     "devDependencies": {
       "@babel/core": "^7.9.0",
@@ -6432,11 +6431,6 @@ Lockfile:
       extend-shallow "^3.0.2"
       regex-not "^1.0.2"
       safe-regex "^1.1.0"
-  
-  toastify-react-native@^2.0.0:
-    version "2.0.0"
-    resolved "https://registry.yarnpkg.com/toastify-react-native/-/toastify-react-native-2.0.0.tgz#5a44d45156dd3aec4b43f349b68c29fc5f323bb4"
-    integrity sha512-1OZVtZifjSTR4VNcNlbBtTlN79eU7Cp6foyJwd1p7zwlQP6jbzSf0EzgTNNQ8gR2m8vu5X8YtysE9e/2GHXzRA==
   
   toidentifier@1.0.0:
     version "1.0.0"

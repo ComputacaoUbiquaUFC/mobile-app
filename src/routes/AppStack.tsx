@@ -11,6 +11,7 @@ import Login from '../pages/Login';
 import Cadastro from '../pages/Cadastro';
 import ResetPass from '../pages/ResetPass';
 import Editar from '../pages/Editar';
+import Report from '../pages/Report';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -26,6 +27,7 @@ function AppStack(){
         <Screen name="Pegar" component={Pegar}/>
         <Screen name="Editar" component={Editar}/>
         <Screen name="Study" component={StudyTabs}/>
+        <Screen name="Report" component={Report}/>
       </Navigator>
     </NavigationContainer>
   )
