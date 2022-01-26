@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 40,
   },
+
   checkboxContainer: {
     flexDirection: "row",
     marginBottom: 20,

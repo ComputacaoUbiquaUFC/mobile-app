@@ -7,12 +7,20 @@ import landingImg from '../../assets/images/bike.png';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
+import api from '../../services/api';
+import { useAuth } from '../../contexts/auth';
 
 function Login(){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { signIn , getUser, signed, user} = useAuth()
 
+    useEffect(() => {
+        if(signed == true){
+            navigate('Landing')
+        }
+    }, [signed])
     async function onLoginPressed(){
         
         if(!email)
@@ -20,14 +28,13 @@ function Login(){
 
         if(!password)
         return Alert.alert('Digite sua senha!');
-        navigate('Landing');
-        /* QUANDO A ROTA EXISTIR DE FATO
-        await api.post('/Login',{
-            email,
-            password
-        }).then(() => {
-            navigate('Home');
-        })*/
+        //navigate('Landing');
+        // QUANDO A ROTA EXISTIR DE FATO
+        await signIn({email, senha: password})
+        console.log(user)
+        
+      
+        //getUser
     }
 
     const {navigate} = useNavigation();

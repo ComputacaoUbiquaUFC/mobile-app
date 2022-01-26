@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor :'#f0f0f7',
   },
+  map: {
+    width: 380,
+    height: 300,
+  },
   containerSecondary:{
     paddingVertical: 30,
   },

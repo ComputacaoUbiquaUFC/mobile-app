@@ -12,6 +12,7 @@ import { RectButton } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import dados from "../../../estacoes.json";
 
+import MapView from 'react-native-maps';
 import styles from "./styles";
 import { COLORS } from "../../theme";
 import PageHeader from "../../components/PageHeader";
@@ -107,6 +108,19 @@ function Pegar() {
 
         {confirmation ? (
           <View style={styles.containerSecondary}>
+   
+           <MapView style={styles.map} 
+            showsUserLocation
+            initialRegion={
+              {
+                latitude: Number(stations.geometry.coordinates[0]),
+                longitude: Number(stations.geometry.coordinates[1]),
+                latitudeDelta: 1,
+                longitudeDelta: 0
+              }
+            }
+           />
+    
             <View style={styles.content}>
               <View style={styles.contentIcon}>
                 <Icon size={120} color={COLORS.GREEN} name="bike-fast" />

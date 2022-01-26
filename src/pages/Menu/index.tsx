@@ -11,6 +11,7 @@ import api from '../../services/api';
 import { useFocusEffect } from '@react-navigation/core';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS } from '../../theme';
+import { useAuth } from '../../contexts/auth';
 
 function Menu(){
 
@@ -22,6 +23,7 @@ function Menu(){
   const [subject, setSubject] = useState('');
   const [week_day, setWeekDay] = useState('');
   const [time, setTime] = useState('');
+  const { signOut } = useAuth()
 
   function loadFavorites(){
     AsyncStorage.getItem('favorites').then(res=>{
@@ -66,6 +68,8 @@ function Menu(){
 
   async function deleteAsyncStorage(){
     await AsyncStorage.removeItem('@estacao');
+    await signOut
+    navigate("Login")
   }
 
   

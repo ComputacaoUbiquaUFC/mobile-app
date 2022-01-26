@@ -6,18 +6,20 @@ import Landing from '../pages/Landing';
 import Pegar from '../pages/Pegar';
 import StudyTabs from './StudyTabs';
 import Home from '../pages/Home';
-import Login from '../pages/Login';
 
 import Cadastro from '../pages/Cadastro';
 import ResetPass from '../pages/ResetPass';
 import Editar from '../pages/Editar';
 import Report from '../pages/Report';
+import { AuthProvider } from '../contexts/auth';
+import Login from '../pages/Login';
 
 const { Navigator, Screen } = createStackNavigator();
 
 function AppStack(){
   return (
     <NavigationContainer>
+      <AuthProvider>
       <Navigator screenOptions={{headerShown:false}}>
         <Screen name="Home" component={Home}/>
         <Screen name="Login" component={Login}/>
@@ -29,6 +31,8 @@ function AppStack(){
         <Screen name="Study" component={StudyTabs}/>
         <Screen name="Report" component={Report}/>
       </Navigator>
+      </AuthProvider>
+      
     </NavigationContainer>
   )
 }
