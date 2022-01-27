@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View , ScrollView, Text , TextInput} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View , ScrollView, Text , TextInput, ActivityIndicator} from 'react-native';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import PageHeader from '../../components/PageHeader';
 import EstacaoItem, { Teacher } from '../../components/EstacaoItem';
@@ -23,7 +23,7 @@ function Menu(){
   const [subject, setSubject] = useState('');
   const [week_day, setWeekDay] = useState('');
   const [time, setTime] = useState('');
-  const { signOut } = useAuth()
+  const { signOut, signed , loading , user} = useAuth()
 
   function loadFavorites(){
     AsyncStorage.getItem('favorites').then(res=>{
@@ -66,10 +66,12 @@ function Menu(){
     navigate("Report");
   }
 
-  async function deleteAsyncStorage(){
-    await AsyncStorage.removeItem('@estacao');
-    await signOut
+  const deleteAsyncStorage = () =>{
     navigate("Login")
+  }
+  async function showAsyncStorage(){
+    const data = await AsyncStorage.getItem('@RNAuth:user');
+    alert(data)
   }
 
   
@@ -95,12 +97,16 @@ function Menu(){
       <View style={styles.containerButtons}>
         <RectButton style={styles.submitButton}>
           <Text style={styles.submitButtonText} onPress={deleteAsyncStorage}>
-            Deletar AsyncStorage
+          {loading ? (
+                  <ActivityIndicator size={42} color={COLORS.WHITE} />
+                ) : (
+                  "SAIR"
+                )}
           </Text>
         </RectButton>
-        <RectButton style={styles.submitButton}>
+        <RectButton style={styles.submitButton} onPress={showAsyncStorage}>
           <Text style={styles.submitButtonText}>
-            Botão 2
+            Async Storage
           </Text>
         </RectButton>
       </View>

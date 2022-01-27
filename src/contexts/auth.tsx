@@ -1,12 +1,13 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import api from "../services/api";
-import { useNavigation } from "@react-navigation/native";
 
 interface User {
   user: string;
   email: string;
   senha: string;
+  cpf: string;
+  nome: string;
 }
 
 interface AuthContextData {
@@ -16,78 +17,70 @@ interface AuthContextData {
   signIn({ email, senha }: any): Promise<any>;
   signOut(): void;
   getUser(): void;
+  createUser({ nome, email, cpf, senha }: any): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [signed, setSigned] = useState(false);
 
-  /*
   useEffect(() => {
-    async function loadStorageData() {
-      const storagedUser = await AsyncStorage.getItem("@RNAuth:user");
-      const storagedToken = await AsyncStorage.getItem("@RNAuth:token");
-
-      if (storagedUser != null && storagedToken != null) {
-        setUser(JSON.parse(storagedUser));
+    const myFunction = async () => {
+      if (user != null) {
+        await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(user));
         setSigned(true);
-      }
-
-      setLoading(false);
-    }
-
-    loadStorageData();
-  }, []);
-  */
-
-  useEffect(() => {
-    async function myFunction(){
-      if(signed == false){
+      }else{
         await AsyncStorage.clear();
-        await AsyncStorage.removeItem("@RNAuth:user");
-        await AsyncStorage.removeItem("@RNAuth:token");
-        setUser(null);
         setSigned(false);
       }
     }
-    myFunction()
-  }, [signed])
+    myFunction();
+  }, [user]);
 
   const signIn = async ({ email, senha }: any) => {
-    setSigned(false);
+    setLoading(true);
     await api
-            .post("/sessions", {
-              email,
-              senha,
-            })
-            .then(async (response) => {
-              
-              setSigned(true);
-              await AsyncStorage.setItem(
-                "@RNAuth:user",
-                JSON.stringify(response.data)
-              );
-              await AsyncStorage.setItem("@RNAuth:token", response.data.token);
-              setUser(response.data);
+      .post("/sessions", {
+        email,
+        senha,
+      })
+      .then((response) => {
+        setUser(response.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setUser(null);
+        setLoading(false);
+        alert("usuario ou senha incorretos");
+      });
+  };
 
-            })
-            .catch(async (error) => {
-              setSigned(false)
-              await AsyncStorage.clear();
-              setUser(null);
-              alert("usuario ou senha incorretos");
-            })
-   
-  }
+  const createUser = async ({ nome, cpf, email, senha }: User) => {
+    setLoading(true);
+    const dados = {
+      nome,
+      cpf,
+      email,
+      senha,
+    };
+    await api.post("/users/", dados)
+    .then( async () =>{
+      await signIn({email, senha})
+      setLoading(false);
+    })
+    .catch(() => {
+      alert("Erro no cadastro");
+      setLoading(false);
+    });
+  };
 
   const getUser = async () => {
     await api
       .get("/users/1c220a32-79c5-4942-a510-acc88fb7e7d0")
       .then((response) => {
-        //alert('oi')
         console.log(response);
       })
       .catch((error) => {
@@ -95,14 +88,12 @@ const AuthProvider: React.FC = ({ children }) => {
       });
   };
   const signOut = async () => {
-    await AsyncStorage.clear();
     setUser(null);
-    setSigned(false);
-  }
+  };
 
   return (
     <AuthContext.Provider
-      value={{ signed, user, loading, signIn, signOut, getUser }}
+      value={{ signed, user, loading, signIn, signOut, getUser, createUser }}
     >
       {children}
     </AuthContext.Provider>

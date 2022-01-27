@@ -20,6 +20,9 @@ import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import MaskInput from "react-native-mask-input";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
+import { useAuth } from "../../contexts/auth";
+import isCpfValido from "../../utils/validateCpf";
+import validateEmail from "../../utils/validateEmail";
 
 function Cadastro() {
   const [name, setName] = useState("");
@@ -30,74 +33,33 @@ function Cadastro() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [isHandle, setIsHandle] = useState(false);
-  const [confirmation, setConfirmation] = useState(false);
+  const { loading, createUser, user } = useAuth();
 
-  async function onCadastroPressed() {
-    
+  const { navigate } = useNavigation();
+
+  const onCadastroPressed = async () => {
     if (!name) return Alert.alert("Digite seu Nome!");
 
     if (!validateEmail(email)) return Alert.alert("Digite um email válido!");
 
-    if (!password)
-      return Alert.alert("Digite uma senha válida!");
+    if (!password) return Alert.alert("Digite uma senha válida!");
 
     if (password != passwordConfirmation)
       return Alert.alert("As senhas não são iguais!");
 
     if (!isCpfValido(cpf.unmasked)) return Alert.alert("Digite um CPF válido!");
 
-    setIsHandle(true)
-    setTimeout(() => {
-        setIsHandle(false);
-        navigate("Landing");
-      }, 3000);
-    
+    createUser({
+      nome: name,
+      cpf: cpf.unmasked,
+      email: email,
+      senha: password,
+    });
 
-    /* QUANDO A ROTA EXISTIR DE FATO
-        await api.post('/Cadastro',{
-            name,
-            cpf: cpf.unmasket,
-            email,
-            password
-        }).then(() => {
-            navigate('Home');
-        })*/
-  }
-
-  function validateEmail(email: string) {
-    return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-  }
-  function isCpfValido(strCPF: String) {
-    var Soma;
-    var Resto;
-    Soma = 0;
-    var i;
-    if (strCPF == "00000000000") return false;
-
-    for (i = 1; i <= 9; i++)
-      Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-    Resto = (Soma * 10) % 11;
-
-    if (Resto == 10 || Resto == 11) Resto = 0;
-    if (Resto != parseInt(strCPF.substring(9, 10))) return false;
-
-    Soma = 0;
-    for (i = 1; i <= 10; i++)
-      Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-    Resto = (Soma * 10) % 11;
-
-    if (Resto == 10 || Resto == 11) Resto = 0;
-    if (Resto != parseInt(strCPF.substring(10, 11))) return false;
-    return true;
-  }
-
-  const { navigate } = useNavigation();
-  function handleNavigateToLanding() {
-    navigate("Landing");
-  }
+    if (user) {
+      navigate("Landing");
+    }
+  };
   function handleGoBack() {
     navigate("Home");
   }
@@ -205,7 +167,11 @@ function Cadastro() {
               onPress={onCadastroPressed}
             >
               <Text style={styles.buttonText}>
-              {isHandle ? <ActivityIndicator size={42} color={COLORS.WHITE} /> : 'CADASTRAR'}
+                {loading ? (
+                  <ActivityIndicator size={42} color={COLORS.WHITE} />
+                ) : (
+                  "CADASTRAR"
+                )}
               </Text>
             </RectButton>
           </TouchableOpacity>
