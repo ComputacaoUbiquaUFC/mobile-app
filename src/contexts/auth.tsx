@@ -3,7 +3,13 @@ import AsyncStorage from "@react-native-community/async-storage";
 import api from "../services/api";
 
 interface User {
-  user: string;
+  user?: {
+    email: string;
+    senha: string;
+    cpf: string;
+    nome: string;
+    id?: string;
+  };
   email: string;
   senha: string;
   cpf: string;
@@ -32,11 +38,11 @@ const AuthProvider: React.FC = ({ children }) => {
       if (user != null) {
         await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(user));
         setSigned(true);
-      }else{
+      } else {
         await AsyncStorage.clear();
         setSigned(false);
       }
-    }
+    };
     myFunction();
   }, [user]);
 
@@ -66,15 +72,16 @@ const AuthProvider: React.FC = ({ children }) => {
       email,
       senha,
     };
-    await api.post("/users/", dados)
-    .then( async () =>{
-      await signIn({email, senha})
-      setLoading(false);
-    })
-    .catch(() => {
-      alert("Erro no cadastro");
-      setLoading(false);
-    });
+    await api
+      .post("/users/", dados)
+      .then(async () => {
+        await signIn({ email, senha });
+        setLoading(false);
+      })
+      .catch(() => {
+        alert("Erro no cadastro");
+        setLoading(false);
+      });
   };
 
   const getUser = async () => {

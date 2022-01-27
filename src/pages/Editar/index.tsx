@@ -20,6 +20,10 @@ import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import MaskInput from "react-native-mask-input";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
+import isCpfValido from "../../utils/validateCpf";
+import validateEmail from "../../utils/validateEmail";
+import { useAuth } from "../../contexts/auth";
+import api from "../../services/api";
 //import emailValidator from '../../middlewares/emailValidator';
 //import passwordValidator from '../../middlewares/passwordValidator';
 //import api from '../../services/api';
@@ -36,16 +40,25 @@ function Editar() {
   const [isHandle, setIsHandle] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
 
+  const { user } = useAuth();
   useEffect(() => {
-    async function getDados(){
-      //chamar api com os dados do usuario
-      setName('Joao')
-      setCpf({masked: '488.110.340-78' , unmasked: '48811034078'})
-      setEmail('joao@gmail.com')
+    const getDados = async () => {
+      console.log(user?.user?.id)
+      await api.get(`/users/${user?.user?.id}`).then((result) => {
+        
+        setName(result.data.user.nome)
+        setCpf({masked: formataCPF(result.data.user.cpf) , unmasked: result.data.user.cpf})
+        setEmail(result.data.user.email)
+      }).catch((error) => {
+        console.log(error)
+      })
     }
    getDados();
   }, [])
-
+  function formataCPF(cpf: string){
+    cpf = cpf.replace(/[^\d]/g, "");
+      return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+  }
   async function onEditarPressed() {
     
     if (!name) return Alert.alert("Digite seu Nome!");
@@ -60,51 +73,7 @@ function Editar() {
 
     if (!isCpfValido(cpf.unmasked)) return Alert.alert("Digite um CPF válido!");
 
-    setIsHandle(true)
-    setTimeout(() => {
-        setIsHandle(false);
-        navigate("Menu");
-      }, 3000);
-    
 
-    /* QUANDO A ROTA EXISTIR DE FATO
-        await api.put('/Editar',{
-            name,
-            cpf: cpf.unmasket,
-            email,
-            password
-        }).then(() => {
-            navigate('Home');
-        })*/
-  }
-
-  function validateEmail(email: string) {
-    return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-  }
-  function isCpfValido(strCPF: String) {
-    var Soma;
-    var Resto;
-    Soma = 0;
-    var i;
-    if (strCPF == "00000000000") return false;
-
-    for (i = 1; i <= 9; i++)
-      Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-    Resto = (Soma * 10) % 11;
-
-    if (Resto == 10 || Resto == 11) Resto = 0;
-    if (Resto != parseInt(strCPF.substring(9, 10))) return false;
-
-    Soma = 0;
-    for (i = 1; i <= 10; i++)
-      Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-    Resto = (Soma * 10) % 11;
-
-    if (Resto == 10 || Resto == 11) Resto = 0;
-    if (Resto != parseInt(strCPF.substring(10, 11))) return false;
-    return true;
   }
 
   const { navigate } = useNavigation();

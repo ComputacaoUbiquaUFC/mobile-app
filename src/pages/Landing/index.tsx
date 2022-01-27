@@ -6,9 +6,12 @@ import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
 import landingImg from '../../assets/images/bike.png';
+import { useAuth } from '../../contexts/auth';
 
 
 function Landing(){
+  
+  const { signOut, signed , loading , user} = useAuth()
   const {navigate} = useNavigation();
   const [totalConnections, setTotalConnections] = useState(0);
 
@@ -24,7 +27,7 @@ function Landing(){
     <View style={styles.container}>
       <Image source={landingImg} style={styles.banner} />
       <Text style={styles.title}>
-        Olá Joao , {'\n'}
+        Olá  {user?.user?.nome}, {'\n'}
         <Text style={styles.titleBold}>Escolha uma das opções</Text>
       </Text>
       

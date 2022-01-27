@@ -28,13 +28,11 @@ function Login() {
   const { signIn, getUser, signed, user, loading, signOut } = useAuth();
 
   useEffect(() => {
-    if (signed) {
+    if (user) {
       navigate("Landing");
     }
-  }, [signed]);
-  useEffect(() => {
-    signOut
-  }, []);
+  }, [user]);
+
 
   const onLoginPressed = async ()  =>{
     if (!email) return Alert.alert("Digite seu usuário!");
