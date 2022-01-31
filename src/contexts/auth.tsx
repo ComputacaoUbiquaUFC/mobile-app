@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import api from "../services/api";
+import { Alert } from "react-native";
 
 interface User {
   user?: {
@@ -40,6 +41,7 @@ const AuthProvider: React.FC = ({ children }) => {
         setSigned(true);
       } else {
         await AsyncStorage.clear();
+        // await AsyncStorage.removeItem("@RNAuth:user");
         setSigned(false);
       }
     };
@@ -60,7 +62,7 @@ const AuthProvider: React.FC = ({ children }) => {
       .catch(() => {
         setUser(null);
         setLoading(false);
-        alert("usuario ou senha incorretos");
+        Alert.alert("Usuário ou senha incorretos");
       });
   };
 
@@ -79,7 +81,7 @@ const AuthProvider: React.FC = ({ children }) => {
         setLoading(false);
       })
       .catch(() => {
-        alert("Erro no cadastro");
+        Alert.alert("Erro no cadastro");
         setLoading(false);
       });
   };
@@ -94,7 +96,7 @@ const AuthProvider: React.FC = ({ children }) => {
         console.error(error);
       });
   };
-  const signOut = async () => {
+  const signOut = () => {
     setUser(null);
   };
 

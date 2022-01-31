@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Alert, View, Image ,Text, TextInput, TouchableOpacity} from 'react-native';
+import { KeyboardAvoidingView, Alert, View, Image ,Text, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
 //rota de navegacao
 import { NavigationRouteContext, useNavigation } from '@react-navigation/native';
 import styles from './styles';
@@ -7,14 +7,24 @@ import landingImg from '../../assets/images/bike.png';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
+import { useAuth } from '../../contexts/auth';
 
 function Reset(){
 
     const [email, setEmail] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     async function onResetPressed(){
         if(!email)
         return Alert.alert('Digite o e-mail!');
+        setIsLoading(true);
+
+        setTimeout(() => {
+            setIsLoading(false);
+            setEmail('')
+            Alert.alert('Um link de recuperação foi enviado ao seu email.')
+        }, 2000);
+
     }
 
     const {navigate} = useNavigation();
@@ -60,7 +70,13 @@ function Reset(){
                     <RectButton 
                         style={[styles.button, styles.buttonSend]}
                         onPress={onResetPressed}>
-                        <Text style={styles.buttonText}>ENVIAR</Text>
+                        <Text style={styles.buttonText}>
+                        {isLoading ? (
+                            <ActivityIndicator size={42} color={COLORS.WHITE} />
+                            ) : (
+                            "ENVIAR"
+                            )}
+                        </Text>
                     </RectButton>
                 </TouchableOpacity>
             </View>

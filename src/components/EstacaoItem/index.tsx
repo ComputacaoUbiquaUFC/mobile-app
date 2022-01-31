@@ -30,19 +30,14 @@ interface TeacherItemProps{
 
 const EstacaoItem: React.FC<TeacherItemProps> = ({teacher, favorited}) => {
 
-  const [isFavorited, setIsFavorited] = useState(favorited);
+  const [isFavorited, setIsFavorited] = useState(false);
 
   function createNewConnection(){
-    /*
-    alert('abrir mapa')
-    api.post('connections',{
-      user_id:teacher.id,
-    });
-    */
     Linking.openURL(`https://maps.google.com/maps?q=${teacher.properties?.endereco}&output=embed`);
   }
 
   async function handleToggleFavorite(){
+    /*
     const favorites = await AsyncStorage.getItem('favorites');
     let favoritesArray = [];
     if(favorites){
@@ -61,6 +56,8 @@ const EstacaoItem: React.FC<TeacherItemProps> = ({teacher, favorited}) => {
       setIsFavorited(true);
     }
     await AsyncStorage.setItem('favorites',JSON.stringify(favoritesArray));
+    */
+    setIsFavorited(!isFavorited)
   }
 
   return (

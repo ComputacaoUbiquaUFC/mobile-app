@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View , ScrollView, Text , TextInput, ActivityIndicator} from 'react-native';
+import { View , ScrollView, Text , TextInput, ActivityIndicator, Alert} from 'react-native';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import PageHeader from '../../components/PageHeader';
 import EstacaoItem, { Teacher } from '../../components/EstacaoItem';
@@ -17,46 +17,7 @@ function Menu(){
 
   const { navigate } = useNavigation();
   const [isFiltersVisible , setIsFiltersVisible] = useState(false);
-  const [teachers, setTeachers] = useState([]);
-  const [favorites, setFavorites] = useState<number[]>([]);
-
-  const [subject, setSubject] = useState('');
-  const [week_day, setWeekDay] = useState('');
-  const [time, setTime] = useState('');
-  const { signOut, signed , loading , user} = useAuth()
-
-  function loadFavorites(){
-    AsyncStorage.getItem('favorites').then(res=>{
-      if(res){
-        const favoritedTeachers = JSON.parse(res);
-        const favoritedTeachersIds = favoritedTeachers.map((teacher:Teacher)=>{
-          return teacher.id;
-        })
-        setFavorites(favoritedTeachersIds); 
-      }
-    });
-  }
-
-  useFocusEffect(() => {
-    loadFavorites();
-  });
-  
-  function handleToggleFiltersVisible(){
-    setIsFiltersVisible(!isFiltersVisible);
-  }
-
-  async function handleFiltersSubmit(){
-    loadFavorites();
-    const response = await api.get('classes',{
-      params: {
-        subject, 
-        week_day,
-        time,
-      }
-    })
-    setIsFiltersVisible(false);
-    setTeachers(response.data);
-  }
+  const { signOut, loading } = useAuth()
 
   function toEditar() {
     navigate("Editar");
@@ -67,11 +28,13 @@ function Menu(){
   }
 
   const deleteAsyncStorage = () =>{
+    signOut()
     navigate("Login")
   }
   async function showAsyncStorage(){
     const data = await AsyncStorage.getItem('@RNAuth:user');
-    alert(data)
+    if(data)
+      alert(data)
   }
 
   
@@ -83,7 +46,6 @@ function Menu(){
 
       <View style={styles.containerButtons}>
         <RectButton style={styles.submitButton} onPress={toEditar}>
-        <Ionicons name="arrow-back-outline" size={24} color={COLORS.WHITE}/>
           <Text style={styles.submitButtonText}>
             Editar
           </Text>
@@ -95,8 +57,8 @@ function Menu(){
         </RectButton>
       </View>
       <View style={styles.containerButtons}>
-        <RectButton style={styles.submitButton}>
-          <Text style={styles.submitButtonText} onPress={deleteAsyncStorage}>
+        <RectButton style={styles.submitButton}  onPress={deleteAsyncStorage}>
+          <Text style={styles.submitButtonText}>
           {loading ? (
                   <ActivityIndicator size={42} color={COLORS.WHITE} />
                 ) : (

@@ -22,6 +22,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
 import isCpfValido from "../../utils/validateCpf";
 import validateEmail from "../../utils/validateEmail";
+import validatePassword from "../../utils/validatePassword";
 import { useAuth } from "../../contexts/auth";
 import api from "../../services/api";
 //import emailValidator from '../../middlewares/emailValidator';
@@ -43,37 +44,43 @@ function Editar() {
   const { user } = useAuth();
   useEffect(() => {
     const getDados = async () => {
-      console.log(user?.user?.id)
-      await api.get(`/users/${user?.user?.id}`).then((result) => {
-        
-        setName(result.data.user.nome)
-        setCpf({masked: formataCPF(result.data.user.cpf) , unmasked: result.data.user.cpf})
-        setEmail(result.data.user.email)
-      }).catch((error) => {
-        console.log(error)
-      })
-    }
-   getDados();
-  }, [])
-  function formataCPF(cpf: string){
+      console.log(user?.user?.id);
+      await api
+        .get(`/users/${user?.user?.id}`)
+        .then((result) => {
+          setName(result.data.user.nome);
+          setCpf({
+            masked: formataCPF(result.data.user.cpf),
+            unmasked: result.data.user.cpf,
+          });
+          setEmail(result.data.user.email);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getDados();
+  }, []);
+  function formataCPF(cpf: string) {
     cpf = cpf.replace(/[^\d]/g, "");
-      return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
   }
   async function onEditarPressed() {
-    
     if (!name) return Alert.alert("Digite seu Nome!");
 
     if (!validateEmail(email)) return Alert.alert("Digite um email válido!");
 
-    if (!password)
-      return Alert.alert("Digite uma senha válida!");
+    if (!password) return Alert.alert("Digite uma senha válida!");
 
     if (password != passwordConfirmation)
       return Alert.alert("As senhas não são iguais!");
 
+    if (!validatePassword(password))
+      return Alert.alert(
+        "Sua senha deve conter caracteres especiais,letras Maiusculas e minúsculas e números"
+      );
+
     if (!isCpfValido(cpf.unmasked)) return Alert.alert("Digite um CPF válido!");
-
-
   }
 
   const { navigate } = useNavigation();
@@ -187,7 +194,11 @@ function Editar() {
               onPress={onEditarPressed}
             >
               <Text style={styles.buttonText}>
-              {isHandle ? <ActivityIndicator size={42} color={COLORS.WHITE} /> : 'SALVAR'}
+                {isHandle ? (
+                  <ActivityIndicator size={42} color={COLORS.WHITE} />
+                ) : (
+                  "SALVAR"
+                )}
               </Text>
             </RectButton>
           </TouchableOpacity>

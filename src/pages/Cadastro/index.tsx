@@ -23,6 +23,7 @@ import { COLORS } from "../../theme";
 import { useAuth } from "../../contexts/auth";
 import isCpfValido from "../../utils/validateCpf";
 import validateEmail from "../../utils/validateEmail";
+import validatePassword from "../../utils/validatePassword";
 
 function Cadastro() {
   const [name, setName] = useState("");
@@ -43,6 +44,11 @@ function Cadastro() {
     if (!validateEmail(email)) return Alert.alert("Digite um email válido!");
 
     if (!password) return Alert.alert("Digite uma senha válida!");
+
+    if (!validatePassword(password))
+      return Alert.alert(
+        "Sua senha deve conter caracteres especiais,letras Maiusculas e minúsculas e números"
+      );
 
     if (password != passwordConfirmation)
       return Alert.alert("As senhas não são iguais!");
