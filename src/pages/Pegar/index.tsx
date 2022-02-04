@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   View,
   ImageBackground,
@@ -62,6 +62,11 @@ function Pegar() {
   const [confirmation, setConfirmation] = useState(false);
   const [location, setLocation] = useState<any>({});
   const [errorMsg, setErrorMsg] = useState('');
+
+  const mapEl = useRef<any>({});
+  const [origin, setOrigin] = useState<any>({});
+  const [destination, setdestination] = useState<any>({});
+  const [distance, setDistance] = useState('');
 
   useEffect(() => {
     setStations(newData);

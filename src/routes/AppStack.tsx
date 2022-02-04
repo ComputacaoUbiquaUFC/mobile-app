@@ -11,6 +11,7 @@ import Login from '../pages/Login';
 import Cadastro from '../pages/Cadastro';
 import ResetPass from '../pages/ResetPass';
 import Editar from '../pages/Editar';
+import Solicitar from '../pages/Solicitar';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -24,6 +25,7 @@ function AppStack(){
         <Screen name="ResetPass" component={ResetPass}/>
         <Screen name="Landing" component={Landing}/>
         <Screen name="Pegar" component={Pegar}/>
+        <Screen name="Solicitar" component={Solicitar}/>
         <Screen name="Editar" component={Editar}/>
         <Screen name="Study" component={StudyTabs}/>
       </Navigator>

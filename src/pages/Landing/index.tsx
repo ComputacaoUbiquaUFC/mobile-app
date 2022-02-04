@@ -13,7 +13,7 @@ function Landing(){
   const [totalConnections, setTotalConnections] = useState(0);
 
   function handleNavigateToPegar(){
-    navigate('Pegar');
+    navigate('Solicitar');
   }
   
   function handleNavigateToStudyPages(){
