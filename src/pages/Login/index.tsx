@@ -81,7 +81,7 @@ function Login() {
           />
           <TextInput
             style={styles.inputarea}
-            maxLength={8}
+            maxLength={20}
             placeholder="Senha"
             secureTextEntry={true}
             onChangeText={(text) => setPassword(text)}

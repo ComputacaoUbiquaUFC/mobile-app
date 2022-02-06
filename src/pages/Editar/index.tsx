@@ -168,7 +168,7 @@ function Editar() {
             <Text style={styles.inputText}>Alterar sua senha:</Text>
             <TextInput
               style={styles.inputarea}
-              maxLength={8}
+              maxLength={20}
               placeholder="Senha"
               secureTextEntry={true}
               onChangeText={(text) => setPassword(text)}
@@ -180,7 +180,7 @@ function Editar() {
             <Text style={styles.inputText}>Confirme alterar sua senha:</Text>
             <TextInput
               style={styles.inputarea}
-              maxLength={8}
+              maxLength={20}
               placeholder="Confirme sua senha"
               secureTextEntry={true}
               onChangeText={(text) => setPasswordConfirmation(text)}

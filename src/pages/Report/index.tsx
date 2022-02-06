@@ -146,7 +146,7 @@ function Report() {
             <Text style={styles.inputText}>Confirme sua senha:</Text>
             <TextInput
               style={styles.inputarea}
-              maxLength={8}
+              maxLength={20}
               placeholder="Confirme sua senha"
               secureTextEntry={true}
               onChangeText={(text) => setPasswordConfirmation(text)}

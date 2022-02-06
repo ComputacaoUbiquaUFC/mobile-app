@@ -147,7 +147,7 @@ function Cadastro() {
             <Text style={styles.inputText}>Crie uma senha:</Text>
             <TextInput
               style={styles.inputarea}
-              maxLength={8}
+              maxLength={20}
               placeholder="Senha"
               secureTextEntry={true}
               onChangeText={(text) => setPassword(text)}
@@ -159,7 +159,7 @@ function Cadastro() {
             <Text style={styles.inputText}>Confirme sua senha:</Text>
             <TextInput
               style={styles.inputarea}
-              maxLength={8}
+              maxLength={20}
               placeholder="Confirme sua senha"
               secureTextEntry={true}
               onChangeText={(text) => setPasswordConfirmation(text)}
