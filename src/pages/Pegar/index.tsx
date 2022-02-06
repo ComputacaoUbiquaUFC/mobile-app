@@ -11,7 +11,6 @@ import { useNavigation } from "@react-navigation/native";
 import { RectButton } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import dados from "../../../estacoes.json";
-
 import MapView from 'react-native-maps';
 import styles from "./styles";
 import { COLORS } from "../../theme";
@@ -19,6 +18,7 @@ import PageHeader from "../../components/PageHeader";
 import * as Location from 'expo-location';
 import Constants from 'expo-constants';
 import AsyncStorage from "@react-native-community/async-storage";
+import Mapa from "../../components/Mapa";
 interface DadosProps {
   geometry: {
     type: string;
@@ -113,43 +113,8 @@ function Pegar() {
 
         {confirmation ? (
           <View style={styles.containerSecondary}>
-   
-           <MapView style={styles.map} 
-            showsUserLocation
-            initialRegion={
-              {
-                latitude: Number(stations.geometry.coordinates[0]),
-                longitude: Number(stations.geometry.coordinates[1]),
-                latitudeDelta: 1,
-                longitudeDelta: 0
-              }
-            }
-           />
-    
-            <View style={styles.content}>
-              <View style={styles.contentIcon}>
-                <Icon size={120} color={COLORS.GREEN} name="bike-fast" />
-              </View>
-              <Text style={styles.contentText}>
-                Em deslocamento para o local
-              </Text>
-              <Text style={styles.contentText}>
-                Sua latitude: {location.coords.latitude}
-              </Text>
-              <Text style={styles.contentText}>
-              Sua longitude: {location.coords.longitude}
-              </Text>
+              <Mapa stations={stations}/>
               
-              <View style={styles.rectButtonView}>
-                <RectButton onPress={handleConfirmationBack} style={styles.okButton}>
-                  <Text style={styles.okButtonText}>Voltar</Text>
-                </RectButton>
-              
-                <RectButton onPress={toReport} style={styles.okButtonReport}>
-                  <Text style={styles.okButtonText}>Algum problema?</Text>
-                </RectButton>
-              </View>
-            </View>
           </View>
         ) : (
           <View style={styles.containerSecondary}>

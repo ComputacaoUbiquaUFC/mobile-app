@@ -16,11 +16,10 @@ const styles = StyleSheet.create({
       height: '20%'
   },
   containerSecondary:{
-    paddingVertical: 30,
+    paddingVertical: 0,
   },
   rectButtonView: {
-    flex: 1,
-    width: '100%',
+    height: 100,
     alignContent: 'center',
     alignItems: 'center',
   },
@@ -86,14 +85,13 @@ const styles = StyleSheet.create({
     width:210,
   },
   okButtonReport:{
-    marginBottom: 50,
     backgroundColor: COLORS.RED,
     height:50,
-    alignItems:'center',
-    justifyContent:'center',
-    alignContent: 'center',
     borderRadius: 8,
     width:210,
+    position: 'absolute',
+    bottom:0,
+    zIndex: 999
   },
 
   okButtonText:{
