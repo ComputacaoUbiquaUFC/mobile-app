@@ -73,7 +73,7 @@ function Pegar() {
   useEffect(() => {
     var item = dados.features[Math.floor(Math.random()*dados.features.length)];
     setStations(item);
-  }, [confirmation]);
+  }, []);
 
   function handleNavigateBack() {
     goBack();

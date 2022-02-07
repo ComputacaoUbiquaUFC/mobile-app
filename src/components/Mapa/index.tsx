@@ -3,11 +3,13 @@ import { View, Text, KeyboardAvoidingView } from "react-native";
 import * as Location from "expo-location";
 import MapView, { Marker, MarkerAnimated } from "react-native-maps";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-
+import { Ionicons } from '@expo/vector-icons';
 import MapViewDirections from "react-native-maps-directions";
 import styles from "./styles";
 import config from "../../config/index.json";
 import { RectButton } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import { COLORS } from "../../theme";
 function Mapa(props) {
   const [location, setLocation] = useState(null);
   const mapEl = useRef<any>({});
@@ -21,7 +23,10 @@ function Mapa(props) {
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null);
   const [region, setRegion] = useState<any>(null);
-
+  const { navigate } = useNavigation();
+  function handleToReport() {
+    navigate("Report");
+  }
   useEffect(() => {
     async function userLocation() {
       const { status } = await Location.requestPermissionsAsync();
@@ -66,8 +71,8 @@ function Mapa(props) {
                 alignSelf: "flex-end", //for align to right
               }}
             >
-              <RectButton>
-                <Text>Solicitar</Text>
+              <RectButton style={styles.reportButton} onPress={handleToReport}>
+                 <Ionicons name="warning" size={24} color={COLORS.WHITE}/>
               </RectButton>
             </View>
         <View style={styles.search}>
