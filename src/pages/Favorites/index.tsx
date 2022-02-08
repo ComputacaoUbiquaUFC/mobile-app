@@ -1,49 +1,135 @@
-import React, { useState } from "react";
-import { View, ScrollView } from "react-native";
-import PageHeader from "../../components/PageHeader";
-import EstacaoItem, { Teacher } from "../../components/EstacaoItem";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useFocusEffect } from "@react-navigation/native";
-
+import React, { useEffect, useState, useRef } from "react";
+import { View, Text, KeyboardAvoidingView } from "react-native";
+import * as Location from "expo-location";
+import MapView, { Marker, MarkerAnimated } from "react-native-maps";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { Ionicons } from '@expo/vector-icons';
+import MapViewDirections from "react-native-maps-directions";
 import styles from "./styles";
-
+import config from "../../config/index.json";
+import { RectButton } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import { COLORS } from "../../theme";
 function Favorites() {
-  const [favorites, setFavorites] = useState([]);
+  const [location, setLocation] = useState(null);
+  const mapEl = useRef<any>({});
+  const [origin, setOrigin] = useState<any>({});
+  const [distance, setDistance] = useState(null);
+  const [duration, setDuration] = useState(null);
+  const [region, setRegion] = useState<any>(null);
+  const [stations, setStations] = useState(null);
 
-  function loadFavorites() {
-    AsyncStorage.getItem("favorites").then((res) => {
-      if (res) {
-        const favoritedTeachers = JSON.parse(res);
-
-        setFavorites(favoritedTeachers);
-      }
-    });
+  const { navigate } = useNavigation();
+  function handleToReport() {
+    navigate("Report");
   }
 
-  useFocusEffect(() => {
-    loadFavorites();
-  });
-  
+  useEffect(() => {
+    async function userLocation() {
+      const { status } = await Location.requestPermissionsAsync();
+      if (status === "granted") {
+        let location = await Location.getCurrentPositionAsync({});
+        setOrigin({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        });
+        setRegion({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        });
+      } else {
+        throw new Error("Permissão de localização não garantida");
+      }
+    }
+    userLocation();
+  }, []);
+
+  console.log(origin);
 
   return (
-    <View style={styles.container}>
-      <PageHeader title="Favoritos" />
+    <KeyboardAvoidingView>
+      <View style={styles.container}>
+      <View
+              style={{
+                position: "absolute", //use absolute position to show button on top of the map
+                top: "50%", //for center align
+                zIndex: 999,
+                alignSelf: "flex-end", //for align to right
+              }}
+            >
+              <RectButton style={styles.reportButton} onPress={handleToReport}>
+                 <Ionicons name="warning" size={24} color={COLORS.WHITE}/>
+              </RectButton>
+            </View>
+        <View style={styles.search}>
+          <View style={styles.distance}>
+            {distance && (
+              <>
+                <Text>Estação: {stations.properties.nome}</Text>
+                <Text>Endereço: {stations.properties.endereco}</Text>
+                <Text>
+                  Bikes disponíveis: {stations.properties.qtd_bikes_total}
+                </Text>
+                <Text>Distância: {distance} m</Text>
+                <Text>Tempo aproximado : {duration} min</Text>
+              </>
+            )}
+          </View>
+        </View>
+        {region && (
+          <MapView
+            style={styles.map}
+            initialRegion={region}
+            showsUserLocation={true}
+            loadingEnabled={true}
+            ref={mapEl}
+          >
+            
+            <Marker
+              title="Minha localização"
+              coordinate={{
+                latitude: region.latitude,
+                longitude: region.longitude,
+              }}
+            />
 
-      <ScrollView
-        style={styles.teacherList}
-        contentContainerStyle={{
-          paddingHorizontal: 16,
-          paddingBottom: 16,
-        }}
-      >
-        {favorites.map((teacher: Teacher) => {
-          return (
-            <EstacaoItem key={teacher.id} teacher={teacher} favorited={true} />
-          );
-        })}
-      </ScrollView>
-    </View>
+            {destination && (
+              <>
+                <MapViewDirections
+                  origin={origin}
+                  destination={destination}
+                  apikey={config.googleApi}
+                  strokeWidth={4}
+                  mode="BICYCLING"
+                  strokeColor="green"
+                  onReady={(result: any) => {
+                    setDistance(result.distance.toFixed(3));
+                    setDuration(result.duration.toFixed(2));
+                    mapEl.current.fitToCoordinates(result.coordinates, {
+                      edgePadding: {
+                        top: 50,
+                        bottom: 50,
+                        left: 50,
+                        right: 50,
+                      },
+                    });
+                  }}
+                />
+                <Marker
+                  title={stations.properties.nome}
+                  coordinate={{
+                    latitude: destination.latitude,
+                    longitude: destination.longitude,
+                  }}
+                />
+              </>
+            )}
+          </MapView>
+        )}
+      </View>
+    </KeyboardAvoidingView>
   );
 }
-
 export default Favorites;
