@@ -19,7 +19,9 @@ import * as Location from 'expo-location';
 import Constants from 'expo-constants';
 import AsyncStorage from "@react-native-community/async-storage";
 import Mapa from "../../components/Mapa";
+import {apiStation } from "../../services/api";
 interface DadosProps {
+  id:number;
   geometry: {
     type: string;
     coordinates: number[];
@@ -40,6 +42,7 @@ interface DadosProps {
 }
 
 const newData = {
+  id: 999,
   geometry: { type: "Point", coordinates: [-38.510347, -3.7321944] },
   type: "Feature",
   properties: {
@@ -60,7 +63,7 @@ const newData = {
 function Pegar() {
   const { goBack ,navigate } = useNavigation();
   const [isHandle, setIsHandle] = useState(false);
-  const [stations, setStations] = useState<DadosProps>(newData);
+  const [stations, setStations] = useState<any | null>(newData);
   const [confirmation, setConfirmation] = useState(false);
   const [location, setLocation] = useState<any>({});
   const [errorMsg, setErrorMsg] = useState('');
@@ -71,8 +74,20 @@ function Pegar() {
   const [distance, setDistance] = useState('');
 
   useEffect(() => {
-    var item = dados.features[Math.floor(Math.random()*dados.features.length)];
-    setStations(item);
+    async function carregarDados(){
+      const {data} = await apiStation.get('/estacoes')
+      var files = data
+      const excludeStations = data.filter((result: any) => 
+        result.properties.status_operacional=="Indisponível"
+      )
+      files = files.filter((item:any) => !excludeStations.includes(item))
+      console.log(files.length)
+      console.log(data.length)
+      setStations(files[Math.floor(files.length * Math.random())]);
+    
+    }
+    
+    carregarDados()
   }, []);
 
   function handleNavigateBack() {

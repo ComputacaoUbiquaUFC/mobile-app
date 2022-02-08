@@ -1,9 +1,10 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
-import api from "../services/api";
+import {api} from "../services/api";
 import { Alert } from "react-native";
 
 interface User {
+  token?: string;
   user?: {
     email: string;
     senha: string;

@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from './styles';
-import api from '../../services/api';
+import {api} from '../../services/api';
 import { useFocusEffect } from '@react-navigation/core';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS } from '../../theme';

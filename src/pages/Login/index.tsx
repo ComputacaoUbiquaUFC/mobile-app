@@ -19,7 +19,7 @@ import landingImg from "../../assets/images/bike.png";
 import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
-import api from "../../services/api";
+import {api} from "../../services/api";
 import { useAuth } from "../../contexts/auth";
 
 function Login() {
