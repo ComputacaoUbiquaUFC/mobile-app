@@ -24,10 +24,10 @@ import isCpfValido from "../../utils/validateCpf";
 import validateEmail from "../../utils/validateEmail";
 import validatePassword from "../../utils/validatePassword";
 import { useAuth } from "../../contexts/auth";
-import api from "../../services/api";
+import {api} from "../../services/api";
 //import emailValidator from '../../middlewares/emailValidator';
 //import passwordValidator from '../../middlewares/passwordValidator';
-//import api from '../../services/api';
+//import {api} from '../../services/api';
 
 function Editar() {
   const [name, setName] = useState("");
@@ -45,8 +45,12 @@ function Editar() {
   useEffect(() => {
     const getDados = async () => {
       console.log(user?.user?.id);
+      const config = {
+        headers: { Authorization: `Bearer ${user?.token}` }
+      };
+    
       await api
-        .get(`/users/${user?.user?.id}`)
+        .get(`/users/${user?.user?.id}` , config)
         .then((result) => {
           setName(result.data.user.nome);
           setCpf({

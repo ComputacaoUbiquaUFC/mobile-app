@@ -24,6 +24,7 @@ import { COLORS } from "../../theme";
 import validateCpf from "../../utils/validateCpf";
 import validateEmail from "../../utils/validateEmail";
 import AsyncStorage from "@react-native-community/async-storage";
+import { apiStation } from "../../services/api";
 
 function Report() {
   const [name, setName] = useState("");
@@ -60,6 +61,21 @@ function Report() {
     getEstacao()
   }, []);
   
+  async function updateStation(){
+    var newData = estacao
+    newData.properties.status_operacional = 'Indisponível'
+    // newData = {...newData, properties: {...newData.properties, status_operacional: 'indisponivel'}}
+    console.log(newData)
+    await apiStation.put(`/estacoes/${newData.id}` , newData).then(() => {
+      alert('Obrigado por reportar!')
+    }).catch(error => {console.log(error)})
+    setIsHandle(false);
+    setIsEstacaoDisponivel(false);
+    setIsBikeComDefeito(false);
+    setIsEstacaoNaoExiste(false);
+    setIsVagaDisponivel(false);
+    navigate('Landing')
+  }
   async function onReportPressed() {
     if (
       !isEstacaoDisponivel &&
@@ -69,15 +85,17 @@ function Report() {
     )
       return Alert.alert("Selecione alguma opção!");
     setIsHandle(true);
-    setTimeout(() => {
-      setIsHandle(false);
-      Alert.alert('Obrigado por reportar')
-      setIsEstacaoDisponivel(false);
-      setIsBikeComDefeito(false);
-      setIsEstacaoNaoExiste(false);
-      setIsVagaDisponivel(false);
-      navigate("Landing");
-    }, 3000);
+    updateStation()
+   
+    // setTimeout(() => {
+      
+    //   Alert.alert('Obrigado por reportar')
+    //   setIsEstacaoDisponivel(false);
+    //   setIsBikeComDefeito(false);
+    //   setIsEstacaoNaoExiste(false);
+    //   setIsVagaDisponivel(false);
+    //   navigate("Landing");
+    // }, 3000);
   }
 
   const { navigate } = useNavigation();
@@ -105,7 +123,7 @@ function Report() {
         <View>
           <Text style={styles.titulo}>Algum problema com essa estação?</Text>
           {estacao && <Text>{estacao.properties.endereco}</Text>}
-          {estacao && <Text>Id da estacao: {estacao.properties.id}</Text>}
+          {estacao && <Text>Id da estacao: {estacao.id}</Text>}
         </View>
         <View>
           <View style={styles.checkboxContainer}>
