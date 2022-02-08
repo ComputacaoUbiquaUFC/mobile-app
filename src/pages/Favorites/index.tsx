@@ -10,6 +10,7 @@ import config from "../../config/index.json";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "../../theme";
+import { apiStation } from "../../services/api";
 function Favorites() {
   const [location, setLocation] = useState(null);
   const mapEl = useRef<any>({});
@@ -17,7 +18,7 @@ function Favorites() {
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null);
   const [region, setRegion] = useState<any>(null);
-  const [stations, setStations] = useState(null);
+  const [stations, setStations] = useState<any|null>({});
 
   const { navigate } = useNavigation();
   function handleToReport() {
@@ -26,6 +27,10 @@ function Favorites() {
 
   useEffect(() => {
     async function userLocation() {
+
+      const { data } = await apiStation.get('/estacoes');
+      setStations(data);
+
       const { status } = await Location.requestPermissionsAsync();
       if (status === "granted") {
         let location = await Location.getCurrentPositionAsync({});
@@ -94,38 +99,6 @@ function Favorites() {
                 longitude: region.longitude,
               }}
             />
-
-            {destination && (
-              <>
-                <MapViewDirections
-                  origin={origin}
-                  destination={destination}
-                  apikey={config.googleApi}
-                  strokeWidth={4}
-                  mode="BICYCLING"
-                  strokeColor="green"
-                  onReady={(result: any) => {
-                    setDistance(result.distance.toFixed(3));
-                    setDuration(result.duration.toFixed(2));
-                    mapEl.current.fitToCoordinates(result.coordinates, {
-                      edgePadding: {
-                        top: 50,
-                        bottom: 50,
-                        left: 50,
-                        right: 50,
-                      },
-                    });
-                  }}
-                />
-                <Marker
-                  title={stations.properties.nome}
-                  coordinate={{
-                    latitude: destination.latitude,
-                    longitude: destination.longitude,
-                  }}
-                />
-              </>
-            )}
           </MapView>
         )}
       </View>
