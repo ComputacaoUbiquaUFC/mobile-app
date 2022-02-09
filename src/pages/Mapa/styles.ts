@@ -6,6 +6,11 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       justifyContent: 'center',
     },
+    middle: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%' 
+    },
 
     map: {
       height: '100%'

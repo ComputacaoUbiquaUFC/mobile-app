@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { View, Text, KeyboardAvoidingView } from "react-native";
+import { View, Text, KeyboardAvoidingView, ActivityIndicator } from "react-native";
 import * as Location from "expo-location";
 import MapView, { Marker, MarkerAnimated } from "react-native-maps";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
@@ -44,6 +44,7 @@ function Mapa() {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         });
+      setLoading(false);
       } else {
         throw new Error("Permissão de localização não garantida");
       }
@@ -51,11 +52,18 @@ function Mapa() {
     userLocation();
   }, []);
 
+  const [loading, setLoading] = useState(true);
 
   return (
     <KeyboardAvoidingView>
       <View style={styles.container}>
-        {region && (
+        {  
+           loading ? (
+            <View style={styles.middle}>
+            <ActivityIndicator size={42} color={COLORS.GREEN} />
+            </View>
+           ) :
+          (
           <MapView
             style={styles.map}
             initialRegion={region}

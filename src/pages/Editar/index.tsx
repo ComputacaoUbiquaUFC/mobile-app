@@ -41,7 +41,7 @@ function Editar() {
   const [isHandle, setIsHandle] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
 
-  const { user } = useAuth();
+  const { user , signOut } = useAuth();
   useEffect(() => {
     const getDados = async () => {
       console.log(user?.user?.id);
@@ -62,6 +62,7 @@ function Editar() {
         .catch((error) => {
           console.log(error);
         });
+      
     };
     getDados();
   }, []);
@@ -85,14 +86,39 @@ function Editar() {
       );
 
     if (!isCpfValido(cpf.unmasked)) return Alert.alert("Digite um CPF válido!");
+    updateUser()
+
   }
 
+  async function updateUser(){
+    const obj = {
+      id: user?.user?.id,
+      nome: name,
+      cpf: cpf.unmasked,
+      email: email,
+      senha: password
+    }
+  
+    await api
+        .put(`/users/` , obj)
+        .then(() => {
+          alert('Atualizado com sucesso')
+          handleToLogin()
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  }
   const { navigate } = useNavigation();
   function handleNavigateToLanding() {
     navigate("Landing");
   }
   function handleGoBack() {
     navigate("Home");
+  }
+  function handleToLogin() {
+    signOut();
+    navigate("Login");
   }
   return (
     <View style={styles.container}>
