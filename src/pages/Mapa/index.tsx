@@ -11,7 +11,7 @@ import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "../../theme";
 import { apiStation } from "../../services/api";
-function Favorites() {
+function Mapa() {
   const [location, setLocation] = useState(null);
   const mapEl = useRef<any>({});
   const [origin, setOrigin] = useState<any>({});
@@ -51,38 +51,10 @@ function Favorites() {
     userLocation();
   }, []);
 
-  console.log(origin);
 
   return (
     <KeyboardAvoidingView>
       <View style={styles.container}>
-      <View
-              style={{
-                position: "absolute", //use absolute position to show button on top of the map
-                top: "50%", //for center align
-                zIndex: 999,
-                alignSelf: "flex-end", //for align to right
-              }}
-            >
-              <RectButton style={styles.reportButton} onPress={handleToReport}>
-                 <Ionicons name="warning" size={24} color={COLORS.WHITE}/>
-              </RectButton>
-            </View>
-        <View style={styles.search}>
-          <View style={styles.distance}>
-            {distance && (
-              <>
-                <Text>Estação: {stations.properties.nome}</Text>
-                <Text>Endereço: {stations.properties.endereco}</Text>
-                <Text>
-                  Bikes disponíveis: {stations.properties.qtd_bikes_total}
-                </Text>
-                <Text>Distância: {distance} m</Text>
-                <Text>Tempo aproximado : {duration} min</Text>
-              </>
-            )}
-          </View>
-        </View>
         {region && (
           <MapView
             style={styles.map}
@@ -99,10 +71,21 @@ function Favorites() {
                 longitude: region.longitude,
               }}
             />
+            {stations && stations.map((item : any) => (
+            <Marker
+              key = {item.id}
+              title={item.properties.nome}
+              description={`Bikes disponíveis: ${item.properties.qtd_bikes_total}`}
+              coordinate={{
+                latitude: item.geometry.coordinates[1],
+                longitude: item.geometry.coordinates[0]
+                }}
+              />
+            ))}
           </MapView>
         )}
       </View>
     </KeyboardAvoidingView>
   );
 }
-export default Favorites;
+export default Mapa;

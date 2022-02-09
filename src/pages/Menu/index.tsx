@@ -66,11 +66,11 @@ function Menu(){
                 )}
           </Text>
         </RectButton>
-        <RectButton style={styles.submitButton} onPress={showAsyncStorage}>
+        {/* <RectButton style={styles.submitButton} onPress={showAsyncStorage}>
           <Text style={styles.submitButtonText}>
             Async Storage
           </Text>
-        </RectButton>
+        </RectButton> */}
       </View>
 
       </View>

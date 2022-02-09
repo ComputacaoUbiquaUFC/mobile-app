@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Menu from '../pages/Menu';
-import Favorites from '../pages/Favorites';
+import Mapa from '../pages/Mapa';
 import { COLORS } from '../theme';
 
 //icones padroes do expo
@@ -53,13 +53,13 @@ function StudyTabs(){
         }}
       />
       <Screen 
-        name="Favorites" 
-        component={Favorites} 
+        name="Mapa" 
+        component={Mapa} 
         options={{
-          tabBarLabel: 'Favoritos',
+          tabBarLabel: 'Mapa',
           tabBarIcon:({color, size , focused})=>{
             return (
-              <Ionicons name="heart-outline" size={size} color={focused? COLORS.GREEN: color}/>
+              <Ionicons name="ios-map" size={size} color={focused? COLORS.GREEN: color}/>
             )
           }
         }}

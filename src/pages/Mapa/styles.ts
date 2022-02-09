@@ -8,13 +8,9 @@ const styles = StyleSheet.create({
     },
 
     map: {
-      height: '86%'
+      height: '100%'
     },
 
-    search: {
-        height: '14%',
-        
-    },
     distance:{
       height: 20
     },

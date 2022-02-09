@@ -27,17 +27,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { apiStation } from "../../services/api";
 
 function Report() {
-  const [name, setName] = useState("");
-  const [cpf, setCpf] = useState({
-    masked: "",
-    unmasked: "",
-  });
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [isHandle, setIsHandle] = useState(false);
-  const [confirmation, setConfirmation] = useState(false);
-
   const [isEstacaoDisponivel, setIsEstacaoDisponivel] = useState(false);
   const [isBikeComDefeito, setIsBikeComDefeito] = useState(false);
   const [isEstacaoNaoExiste, setIsEstacaoNaoExiste] = useState(false);
@@ -86,16 +76,6 @@ function Report() {
       return Alert.alert("Selecione alguma opção!");
     setIsHandle(true);
     updateStation()
-   
-    // setTimeout(() => {
-      
-    //   Alert.alert('Obrigado por reportar')
-    //   setIsEstacaoDisponivel(false);
-    //   setIsBikeComDefeito(false);
-    //   setIsEstacaoNaoExiste(false);
-    //   setIsVagaDisponivel(false);
-    //   navigate("Landing");
-    // }, 3000);
   }
 
   const { navigate } = useNavigation();
@@ -135,7 +115,7 @@ function Report() {
             />
           </View>
           <View style={styles.checkboxContainer}>
-            <Text style={styles.label}>A bike esta com defeito</Text>
+            <Text style={styles.label}>A bike está com defeito</Text>
             <CheckBox
               value={isBikeComDefeito}
               onValueChange={setIsBikeComDefeito}
@@ -158,20 +138,6 @@ function Report() {
               style={styles.checkbox}
             />
           </View>
-
-          {/*
-          <View>
-            <Text style={styles.inputText}>Confirme sua senha:</Text>
-            <TextInput
-              style={styles.inputarea}
-              maxLength={20}
-              placeholder="Confirme sua senha"
-              secureTextEntry={true}
-              onChangeText={(text) => setPasswordConfirmation(text)}
-              value={passwordConfirmation}
-            />
-          </View>
-          */}
           <TouchableOpacity>
             <RectButton
               style={[styles.button, styles.buttonLogin]}

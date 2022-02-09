@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Image, Linking, Text, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import heartOutlineIcon from '../../assets/images/icons/heart-outline.png';
 import unfavoriteIcon from '../../assets/images/icons/unfavorite.png';
-import whatsappIcon from '../../assets/images/icons/whatsapp.png';
-import {api} from '../../services/api';
 import styles from './styles';
 
+import { Ionicons } from '@expo/vector-icons';
+import { COLORS } from '../../theme';
 export interface Teacher{
   id:number;
   avatar:string;
@@ -28,7 +26,7 @@ interface TeacherItemProps{
   favorited:boolean;
 }
 
-const EstacaoItem: React.FC<TeacherItemProps> = ({teacher, favorited}) => {
+const EstacaoItem: React.FC<any> = ({teacher, favorited}) => {
 
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -37,43 +35,26 @@ const EstacaoItem: React.FC<TeacherItemProps> = ({teacher, favorited}) => {
   }
 
   async function handleToggleFavorite(){
-    /*
-    const favorites = await AsyncStorage.getItem('favorites');
-    let favoritesArray = [];
-    if(favorites){
-      favoritesArray = JSON.parse(favorites);
-    }
-
-    if(isFavorited){
-      const favoriteIndex = favoritesArray.findIndex((teacherItem:Teacher)=>{
-        return teacherItem.id === teacher.id;
-      });
-      favoritesArray.splice(favoriteIndex,1);
-      setIsFavorited(false);
-    }else{
-      favoritesArray.push(teacher);
-
-      setIsFavorited(true);
-    }
-    await AsyncStorage.setItem('favorites',JSON.stringify(favoritesArray));
-    */
     setIsFavorited(!isFavorited)
   }
 
   return (
     <View style={styles.container} >
       <View style={styles.profile}>
-        <Image 
-          style={styles.avatar} 
-          source={{ uri: teacher.avatar }}
-        />
         <View style={styles.profileInfo}>
           <Text style={styles.name}>{teacher.properties?.nome}</Text>
-          <Text style={styles.subject}>{teacher.subject}</Text>
+          {teacher.properties?.status_operacional === 'Indisponível' ? <>
+          <Text style={styles.subject}>{teacher.properties?.endereco}</Text>
+          <Text style={styles.subject}>A estação está Indisponível</Text>
+          </> : <>
+          <Text style={styles.subject}>{teacher.properties?.endereco}</Text>
+          <Text style={styles.subject}>Bikes disponíveis: {teacher.properties?.qtd_bikes_total}</Text>
+          </> }
+          
         </View>
       </View>
 
-      <Text style={styles.bio}>{teacher.bio}</Text>
+      <Text style={styles.bio}></Text>
 
       <View style={styles.footer}>
         <View style={styles.buttonsContainer}>
@@ -85,8 +66,8 @@ const EstacaoItem: React.FC<TeacherItemProps> = ({teacher, favorited}) => {
              ]}
           >
             { isFavorited 
-              ? <Image source={unfavoriteIcon} />
-              : <Image source={heartOutlineIcon} /> 
+              ?  <Ionicons name="warning" size={21} color={ COLORS.WHITE}/>
+              : <Ionicons name="ios-map" size={21} color={ COLORS.GREEN}/>
             }
             
             
